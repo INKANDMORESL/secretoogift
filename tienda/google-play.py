@@ -6,11 +6,11 @@ R = '/home/claude/secretoogift'
 S = f'{R}/tienda/google-play'; os.makedirs(S, exist_ok=True)
 FD = '/usr/share/fonts/opentype/inter/InterDisplay-ExtraBold.otf'
 FR = '/usr/share/fonts/opentype/inter/Inter-SemiBold.otf'
-TIT = {
- 'es': [('El amigo invisible,', 'sin papelitos'), ('Apunta a todos', 'en un momento'), ('Envía los enlaces', 'y mira quién lo ha visto'),
-        ('Cada uno descubre', 'su amigo invisible'), ('Premium por 0,99 €', 'sin anuncios')],
- 'en': [('Secret Santa,', 'no paper slips'), ('Add everyone', 'in a moment'), ('Send the links', 'and see who has looked'),
-        ('Everyone finds out', 'who they’re buying for'), ('Premium for €0.99', 'no ads')]}
+# Mismos titulares que las capturas de la App Store
+_c = open(f'{R}/tienda/capturas.py').read()
+TIT = eval(_c[_c.index('TITULOS = {') + 10:_c.index("FD = ")].strip())
+LEMAS = {'es': 'El amigo invisible, sin papelitos', 'en': 'Secret Santa, no paper slips', 'pt': 'Amigo secreto, sem papelinhos',
+         'fr': 'Père Noël secret, sans papiers', 'it': 'Babbo Natale segreto, facile', 'de': 'Wichteln ohne Zettelchen'}
 
 def fondo(W, H):
     im = Image.new('RGB', (W, H), '#0b3a7a'); g = Image.new('RGB', (W, H), '#1a56b8'); m = Image.new('L', (W, H), 0)
@@ -39,7 +39,8 @@ for l, ts in TIT.items():
 Image.open(f'{R}/movil/assets/icon.png').resize((512, 512), Image.LANCZOS).save(f'{S}/icono-512.png')
 # Gráfico de funciones 1024x500 (es y en)
 logo = Image.open(f'{R}/movil/assets/splash.png').resize((300, 300), Image.LANCZOS)
-for l, (t1, t2) in {'es': ('Secretoogift', 'El amigo invisible, sin papelitos'), 'en': ('Secretoogift', 'Secret Santa, no paper slips')}.items():
+for l, t2 in LEMAS.items():
+    t1 = 'Secretoogift'
     im = fondo(1024, 500).convert('RGBA'); im.alpha_composite(logo, (70, 100)); d = ImageDraw.Draw(im)
     d.text((410, 150), t1, font=ImageFont.truetype(FD, 86), fill='#ffffff')
     f = ImageFont.truetype(FR, 38)

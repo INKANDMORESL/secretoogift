@@ -1,21 +1,27 @@
-SECRETOOGIFT · TEXTOS PARA APP STORE CONNECT
-(Copiar y pegar. Entre corchetes, el límite de caracteres de Apple.)
+SECRETOOGIFT · FICHA DE LA TIENDA EN 6 IDIOMAS
+Copiar y pegar en App Store Connect (y en Google Play cuando salga Android). Todos los textos caben en los límites de Apple.
 
 ==================================================================
-DATOS GENERALES
+1. AJUSTES GENERALES (App Store Connect → Secretoogift)
 ==================================================================
-Paquete (Bundle ID): app.secretoogift
-SKU: secretoogift
-Idioma principal: Español (España)
-Categoría principal: Estilo de vida · Secundaria: Utilidades
-Edad: 4+ (sin contenido sensible; los anuncios son no personalizados)
-URL de soporte: https://secretoogift.com/
-URL de marketing: https://secretoogift.com/
-URL de la política de privacidad: https://secretoogift.com/legal.html
-(Si el dominio final es otro, cambia secretoogift.com por el tuyo.)
+• Información de la app → Idioma principal: English (U.S.)
+  (En los países cuyo idioma no esté abajo, Apple enseña el idioma principal. En inglés lo entiende más gente que en español.)
+• Información de la app → Categoría: Estilo de vida · Secundaria: Utilidades
+• Información de la app → Edad: 4+
+• Precios y disponibilidad → Disponibilidad: todos los países y regiones.
+• URL de soporte y de marketing: https://secretoogift.com/   ·   Política de privacidad: https://secretoogift.com/legal.html
+  (Si el dominio final es otro, cámbialo.)
+• Para añadir cada idioma: en la versión 1.0, arriba a la derecha, el desplegable de idioma → «Añadir idioma».
+  Pon el mismo texto en las variantes de un idioma (por ejemplo, Español (España) y Español (México)).
+
+CAPTURAS (mismas en todas las variantes de cada idioma):
+• Casilla «iPhone 6,9"»: carpeta app-store/ → {idioma}-1.png … {idioma}-5.png
+• Casilla «iPhone 6,3"» o «6,1"»: carpeta app-store-6,3/
+• Casilla «iPhone 6,5"»: carpeta app-store-6,5/
+  es = español · en = inglés · pt = portugués · fr = francés · it = italiano · de = alemán
 
 ==================================================================
-ESPAÑOL (España)
+2. ESPAÑOL — Español (España) y Español (México)
 ==================================================================
 Nombre [30]:
 Secretoogift: Amigo invisible
@@ -25,6 +31,12 @@ Sorteo fácil y sin papelitos
 
 Texto promocional [170]:
 Organiza el amigo invisible en un minuto: apunta a todos, sortea y cada uno recibe su enlace secreto por correo o WhatsApp. Gratis y sin registro.
+
+Palabras clave [100]:
+amigo invisible,sorteo,regalo,navidad,secret santa,reyes,papá noel,intercambio,regalos,familia
+
+Novedades de esta versión:
+Primera versión de Secretoogift. ¡Feliz amigo invisible!
 
 Descripción [4000]:
 Secretoogift es la forma más fácil de organizar el amigo invisible con la familia, el trabajo o los amigos. Sin papelitos, sin trampas y sin que nadie se quede sin saber a quién le toca.
@@ -46,7 +58,7 @@ LO QUE MÁS GUSTA
 
 GRATIS O PREMIUM
 Gratis hasta 6 participantes, con un anuncio antes de ver cada resultado.
-El sorteo premium cuesta 0,99 € (pago único por sorteo, sin suscripción) e incluye:
+El sorteo premium es un pago único por sorteo, sin suscripción, e incluye:
 • Participantes ilimitados
 • Exclusiones (que parejas o hermanos no se toquen)
 • Sin anuncios
@@ -56,25 +68,25 @@ El sorteo premium cuesta 0,99 € (pago único por sorteo, sin suscripción) e i
 
 ¡Feliz amigo invisible!
 
-Palabras clave [100]:
-amigo invisible,sorteo,regalo,navidad,secret santa,reyes,papá noel,intercambio,regalos,familia
-
-Novedades de esta versión [4000]:
-Primera versión de Secretoogift. ¡Feliz amigo invisible!
-
 ==================================================================
-ENGLISH (U.K.) — añadir como idioma en App Store Connect
+3. ENGLISH — English (U.S.), English (U.K.), English (Australia), English (Canada)
 ==================================================================
-Name [30]:
+Nombre [30]:
 Secretoogift: Secret Santa
 
-Subtitle [30]:
+Subtítulo [30]:
 Easy draw, no paper slips
 
-Promotional text [170]:
+Texto promocional [170]:
 Organise Secret Santa in a minute: add everyone, run the draw and each person gets their secret link by email or WhatsApp. Free, no sign-up.
 
-Description [4000]:
+Palabras clave [100]:
+gift exchange,christmas,draw,kris kringle,white elephant,presents,family,office,names,generator
+
+Novedades de esta versión:
+First version of Secretoogift. Happy Secret Santa!
+
+Descripción [4000]:
 Secretoogift is the easiest way to organise Secret Santa with family, work or friends. No paper slips, no cheating and nobody left wondering who they got.
 
 HOW IT WORKS
@@ -94,7 +106,7 @@ WHAT PEOPLE LOVE
 
 FREE OR PREMIUM
 Free for up to 6 participants, with one ad before each result.
-A premium draw costs €0.99 (one-off payment per draw, no subscription) and includes:
+A premium draw is a one-off payment per draw, with no subscription, and includes:
 • Unlimited participants
 • Exclusions (stop couples or siblings drawing each other)
 • No ads
@@ -104,54 +116,238 @@ A premium draw costs €0.99 (one-off payment per draw, no subscription) and inc
 
 Happy Secret Santa!
 
-Keywords [100]:
-secret santa,gift exchange,christmas,draw,kris kringle,white elephant,presents,family,office,names
+==================================================================
+4. PORTUGUÊS — Portuguese (Portugal) y Portuguese (Brazil)
+==================================================================
+Nombre [30]:
+Secretoogift: Amigo secreto
 
-What’s new [4000]:
-First version of Secretoogift. Happy Secret Santa!
+Subtítulo [30]:
+Sorteio fácil, sem papelinhos
+
+Texto promocional [170]:
+Organiza o amigo secreto num minuto: adiciona todos, faz o sorteio e cada um recebe o seu link secreto por email ou WhatsApp. Grátis e sem registo.
+
+Palabras clave [100]:
+amigo oculto,sorteio,natal,presentes,troca de presentes,família,escritório,secret santa,prendas
+
+Novedades de esta versión:
+Primeira versão do Secretoogift. Feliz amigo secreto!
+
+Descripción [4000]:
+O Secretoogift é a forma mais fácil de organizar o amigo secreto com a família, o trabalho ou os amigos. Sem papelinhos, sem batota e sem ninguém ficar sem saber a quem oferece.
+
+COMO FUNCIONA
+1. Adiciona os participantes (e, se quiseres, os emails).
+2. Escolhe o orçamento e a data com um toque.
+3. Sorteia: ninguém calha a si próprio.
+4. Cada um descobre o seu amigo secreto com o seu link secreto, ou passem o telemóvel se estiverem juntos.
+
+O QUE MAIS AGRADA
+• Um link secreto para cada um: só vê o seu resultado. Nem o organizador o vê, a não ser que peça.
+• Vê quem já abriu o seu link.
+• Envia todos os links por email de uma vez, ou um a um por WhatsApp.
+• Modo «passar o telemóvel» para quando estão todos juntos.
+• Quem recebe o link não precisa da app: abre-o em qualquer telemóvel ou computador.
+• Sem registo, sem contas e sem palavras-passe.
+• Em 6 idiomas: português, espanhol, inglês, francês, italiano e alemão.
+
+GRÁTIS OU PREMIUM
+Grátis até 6 participantes, com um anúncio antes de cada resultado.
+O sorteio premium é um pagamento único por sorteio, sem subscrição, e inclui:
+• Participantes ilimitados
+• Exclusões (casais ou irmãos não se calham um ao outro)
+• Sem anúncios
+• Edição total do sorteio
+• O teu nome em destaque como organizador
+• Ajuda personalizada
+
+Feliz amigo secreto!
 
 ==================================================================
-COMPRA DENTRO DE LA APP
+5. FRANÇAIS — French (France) y French (Canada)
+==================================================================
+Nombre [30]:
+Secretoogift: Père Noël secret
+
+Subtítulo [30]:
+Tirage au sort facile
+
+Texto promocional [170]:
+Organisez le Père Noël secret en une minute : ajoutez tout le monde, lancez le tirage et chacun reçoit son lien secret par e-mail ou WhatsApp. Gratuit.
+
+Palabras clave [100]:
+tirage au sort,cadeaux,noël,secret santa,échange de cadeaux,famille,bureau,pioche,surprise
+
+Novedades de esta versión:
+Première version de Secretoogift. Joyeux Père Noël secret !
+
+Descripción [4000]:
+Secretoogift est le moyen le plus simple d’organiser le Père Noël secret en famille, au travail ou entre amis. Sans petits papiers, sans triche, et personne ne reste sans savoir à qui il offre.
+
+COMMENT ÇA MARCHE
+1. Ajoutez les participants (et, si vous voulez, leurs e-mails).
+2. Choisissez le budget et la date en un geste.
+3. Lancez le tirage : personne ne se tire soi-même.
+4. Chacun découvre à qui il offre grâce à son lien secret, ou passez-vous le téléphone si vous êtes ensemble.
+
+CE QU’ON AIME
+• Un lien secret pour chacun : il ne voit que son résultat. Même l’organisateur ne le voit pas, sauf s’il le demande.
+• Voyez qui a déjà ouvert son lien.
+• Envoyez tous les liens par e-mail d’un coup, ou un par un sur WhatsApp.
+• Mode « passer le téléphone » quand vous êtes tous ensemble.
+• Ceux qui reçoivent le lien n’ont pas besoin de l’app : il s’ouvre sur n’importe quel téléphone ou ordinateur.
+• Sans inscription, sans compte et sans mot de passe.
+• En 6 langues : français, espagnol, anglais, portugais, italien et allemand.
+
+GRATUIT OU PREMIUM
+Gratuit jusqu’à 6 participants, avec une publicité avant chaque résultat.
+Le tirage premium est un paiement unique par tirage, sans abonnement, et comprend :
+• Participants illimités
+• Exclusions (les couples ou frères et sœurs ne se tirent pas)
+• Sans publicité
+• Modification totale du tirage
+• Votre nom mis en avant comme organisateur
+• Aide personnalisée
+
+Joyeux Père Noël secret !
+
+==================================================================
+6. ITALIANO — Italian
+==================================================================
+Nombre [30]:
+Secretoogift: Secret Santa
+
+Subtítulo [30]:
+Babbo Natale segreto facile
+
+Texto promocional [170]:
+Organizza il Babbo Natale segreto in un minuto: aggiungi tutti, fai l’estrazione e ognuno riceve il suo link segreto per email o WhatsApp. Gratis.
+
+Palabras clave [100]:
+babbo natale segreto,estrazione,regali,natale,scambio regali,famiglia,ufficio,amico segreto
+
+Novedades de esta versión:
+Prima versione di Secretoogift. Buon Babbo Natale segreto!
+
+Descripción [4000]:
+Secretoogift è il modo più semplice per organizzare il Babbo Natale segreto con la famiglia, al lavoro o con gli amici. Niente bigliettini, niente imbrogli e nessuno resta col dubbio.
+
+COME FUNZIONA
+1. Aggiungi i partecipanti (e, se vuoi, le loro email).
+2. Scegli budget e data con un tocco.
+3. Estrai: nessuno estrae se stesso.
+4. Ognuno scopre a chi fare il regalo con il suo link segreto, oppure passatevi il telefono se siete insieme.
+
+COSA PIACE DI PIÙ
+• Un link segreto per ognuno: vede solo il suo risultato. Nemmeno l’organizzatore lo vede, a meno che non lo chieda.
+• Guarda chi ha già aperto il suo link.
+• Invia tutti i link per email in un colpo solo, o uno a uno su WhatsApp.
+• Modalità «passa il telefono» per quando siete tutti insieme.
+• Chi riceve il link non ha bisogno dell’app: si apre su qualsiasi telefono o computer.
+• Senza registrazione, senza account e senza password.
+• In 6 lingue: italiano, spagnolo, inglese, portoghese, francese e tedesco.
+
+GRATIS O PREMIUM
+Gratis fino a 6 partecipanti, con una pubblicità prima di ogni risultato.
+L’estrazione premium è un pagamento unico per estrazione, senza abbonamento, e include:
+• Partecipanti illimitati
+• Esclusioni (coppie o fratelli non si estraggono a vicenda)
+• Senza pubblicità
+• Modifica totale dell’estrazione
+• Il tuo nome in evidenza come organizzatore
+• Assistenza personalizzata
+
+Buon Babbo Natale segreto!
+
+==================================================================
+7. DEUTSCH — German (Germany)
+==================================================================
+Nombre [30]:
+Secretoogift: Wichteln
+
+Subtítulo [30]:
+Einfach auslosen, ohne Zettel
+
+Texto promocional [170]:
+Organisiere dein Wichteln in einer Minute: alle eintragen, auslosen und jeder bekommt seinen geheimen Link per E-Mail oder WhatsApp. Kostenlos.
+
+Palabras clave [100]:
+auslosen,weihnachten,geschenke,schrottwichteln,familie,büro,losen,secret santa,julklapp
+
+Novedades de esta versión:
+Erste Version von Secretoogift. Frohes Wichteln!
+
+Descripción [4000]:
+Secretoogift ist der einfachste Weg, das Wichteln mit Familie, Kollegen oder Freunden zu organisieren. Keine Zettelchen, kein Schummeln und keine offenen Fragen.
+
+SO FUNKTIONIERT’S
+1. Teilnehmer eintragen (und, wenn du willst, ihre E-Mails).
+2. Budget und Datum mit einem Tipp wählen.
+3. Auslosen: Niemand zieht sich selbst.
+4. Jeder erfährt mit seinem geheimen Link, wen er beschenkt – oder ihr gebt das Handy herum, wenn ihr zusammen seid.
+
+DAS GEFÄLLT
+• Ein geheimer Link für jeden: Jeder sieht nur sein Ergebnis. Auch der Organisator nicht, außer er will es.
+• Sieh, wer seinen Link schon geöffnet hat.
+• Alle Links auf einmal per E-Mail oder einzeln per WhatsApp senden.
+• „Handy weitergeben“-Modus, wenn ihr alle zusammen seid.
+• Wer einen Link bekommt, braucht die App nicht: Er öffnet sich auf jedem Handy oder Computer.
+• Ohne Anmeldung, ohne Konto, ohne Passwort.
+• In 6 Sprachen: Deutsch, Spanisch, Englisch, Portugiesisch, Französisch und Italienisch.
+
+KOSTENLOS ODER PREMIUM
+Kostenlos bis 6 Teilnehmer, mit einer Werbung vor jedem Ergebnis.
+Die Premium-Auslosung ist eine Einmalzahlung pro Auslosung, ohne Abo, und enthält:
+• Unbegrenzte Teilnehmer
+• Ausschlüsse (Paare oder Geschwister ziehen sich nicht)
+• Keine Werbung
+• Volle Bearbeitung der Auslosung
+• Dein Name als Organisator hervorgehoben
+• Persönliche Hilfe
+
+Frohes Wichteln!
+
+==================================================================
+COMPRA DENTRO DE LA APP (App Store Connect → Monetización → Compras dentro de la app → +)
 ==================================================================
 Tipo: Consumible
-ID de producto: secretoogift_sorteo_premium
 Nombre de referencia: Sorteo premium
-Precio: 0,99 €
-Nombre visible (ES): Sorteo premium
-Descripción (ES): Sin anuncios, exclusiones y participantes ilimitados en un sorteo.
-Nombre visible (EN): Premium draw
-Descripción (EN): No ads, exclusions and unlimited participants for one draw.
-Captura para la revisión: tienda/app-store/es-5.png
+ID de producto: secretoogift_sorteo_premium   (exacto: la app lo busca con este nombre)
+Precio: 0,99 € (Apple lo convierte solo en cada país)
+Captura para la revisión: app-store/es-5.png
+Nombre visible y descripción por idioma:
+• es: Sorteo premium — Sin anuncios, exclusiones e ilimitados en un sorteo.
+• en: Premium draw — No ads, exclusions and unlimited people for one draw.
+• pt: Sorteio premium — Sem anúncios, exclusões e ilimitados num sorteio.
+• fr: Tirage premium — Sans pub, exclusions et illimité pour un tirage.
+• it: Estrazione premium — Senza pubblicità, con esclusioni, per un’estrazione.
+• de: Premium-Auslosung — Ohne Werbung, mit Ausschlüssen, für eine Auslosung.
 
 ==================================================================
 PRIVACIDAD DE LA APP (App Store Connect → Privacidad de la app)
 ==================================================================
 ¿Recopila datos? Sí.
-• Información de contacto → Dirección de correo electrónico: Funcionalidad de la app. No vinculada a la identidad. No se usa para rastreo.
+• Información de contacto → Correo electrónico: Funcionalidad de la app. No vinculado a la identidad. No se usa para rastreo.
   (Son los emails de los participantes, solo para enviarles su enlace; se borran a los 120 días.)
-• Identificadores → ID del dispositivo: Publicidad de terceros (Google AdMob). No vinculada a la identidad. No se usa para rastreo
-  (anuncios solo no personalizados).
-• Datos de uso → Interacción con el producto: Publicidad de terceros (Google AdMob). No vinculada. No rastreo.
-• Compras → Historial de compras: Funcionalidad de la app (RevenueCat). No vinculada. No rastreo.
+• Identificadores → ID del dispositivo: Publicidad de terceros (Google AdMob). No vinculado. No rastreo (anuncios no personalizados).
+• Datos de uso → Interacción con el producto: Publicidad de terceros (Google AdMob). No vinculado. No rastreo.
+• Compras → Historial de compras: Funcionalidad de la app (RevenueCat). No vinculado. No rastreo.
 
 ==================================================================
-NOTAS PARA LA REVISIÓN DE APPLE
+NOTAS PARA LA REVISIÓN DE APPLE (en inglés, que es lo que leen)
 ==================================================================
-No hace falta cuenta ni contraseña. Para probar: «Nuevo sorteo» → escribe 3 nombres → «Guardar y sortear» → elige «Crear sorteo premium» (compra de prueba) o «No quiero estas ventajas» (versión gratis con anuncio). Luego «Pasar el móvil» → toca un nombre → toca el regalo para ver el resultado. En «Enviar enlaces» se puede mandar a cada persona su enlace por correo o WhatsApp.
+No account or password is needed. To test: tap "New draw" → type 3 names → "Save and draw" → choose "Create premium draw" (sandbox purchase) or "No thanks" (free version with an ad). Then "Pass the phone" → tap a name → tap the gift to see the result. In "Send links" you can send each person their link by email or WhatsApp.
 
 ==================================================================
-GOOGLE PLAY (para cuando salga la versión de Android)
+GOOGLE PLAY (para cuando salga Android)
 ==================================================================
-Imágenes: carpeta google-play/ (icono-512.png, grafico-es.png / grafico-en.png de 1024x500, capturas 1080x1920).
-Categoría: Estilo de vida · Etiquetas: Navidad, regalos, fiestas.
-Clasificación de contenido: para todos (anuncios: sí; compras en la app: sí).
-
-Español
-Nombre de la app [30]: Secretoogift: Amigo invisible
-Descripción breve [80]: Organiza el amigo invisible en un minuto. Enlaces secretos, sin registro.
-Descripción completa [4000]: la misma que la de la App Store (arriba).
-
-English
-App name [30]: Secretoogift: Secret Santa
-Short description [80]: Organise Secret Santa in a minute. Secret links, no sign-up.
-Full description [4000]: the same as the App Store one (above).
+Imágenes: carpeta google-play/ → icono-512.png, grafico-{idioma}.png (el «Gráfico de funciones», 1024×500) y capturas {idioma}-1…5.png (1080×1920).
+Categoría: Estilo de vida. Nombre y descripción completa: los mismos de arriba en cada idioma.
+Descripción breve [80]:
+• es: Organiza el amigo invisible en un minuto. Enlaces secretos, sin registro.
+• en: Organise Secret Santa in a minute. Secret links, no sign-up.
+• pt: Organiza o amigo secreto num minuto. Links secretos, sem registo.
+• fr: Organisez le Père Noël secret en une minute. Liens secrets, sans inscription.
+• it: Organizza il Babbo Natale segreto in un minuto. Link segreti, senza registrarti.
+• de: Organisiere dein Wichteln in einer Minute. Geheime Links, ohne Anmeldung.
