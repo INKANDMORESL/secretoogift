@@ -464,11 +464,11 @@ function wizardView(){
   }else{
     const n=g.people.length;
     cuerpo=`<h1 class="wz-h">${t('wzStep4T')}</h1>
-      <div class="card" style="margin-top:6px">
-        <div class="row" style="margin-bottom:10px"><h3 style="flex:1">${t('participants')} <span class="muted" style="font-weight:500">(${n})</span></h3></div>
-        ${g.people.map(p=>`<div class="prow">${avatar(p,34)}<span class="name">${esc(p.name)}${p.yo?` <span class="muted" style="font-weight:400">${t('you')}</span>`:''}${p.email?`<br><span class="muted small" style="font-weight:400">✉️ ${esc(p.email)}</span>`:''}</span>
-          ${p.yo?'':`<button class="btn ghost sm" data-delp="${p.id}" aria-label="${esc(t('remove'))}">✕</button>`}</div>`).join('')}
-        <div class="row" style="margin-top:12px;align-items:stretch">
+      <div class="burbujas">${g.people.map(p=>`<div class="burbuja">${avatar(p,32)}<span class="bn">${esc(p.name)}${p.yo?` <span class="muted" style="font-weight:400">${t('you')}</span>`:''}${p.email?`<small>${esc(p.email)}</small>`:''}</span>
+        ${p.yo?'':`<button class="bx" data-delp="${p.id}" aria-label="${esc(t('remove'))}">✕</button>`}</div>`).join('')}</div>
+      <div class="card" style="margin-top:12px">
+        <h3 style="margin-bottom:10px">${t('wzAddT')} <span class="muted" style="font-weight:500">· ${t('wzCount',{n})}</span></h3>
+        <div class="row" style="align-items:stretch">
           <div style="flex:1" class="stack"><input id="pname" placeholder="${esc(t('namePh'))}" maxlength="24" enterkeyhint="next">
           <input id="pemail" type="email" inputmode="email" autocapitalize="off" placeholder="${esc(t('emailPh'))}" maxlength="80" enterkeyhint="done"></div>
           <button class="btn dark sm" data-act="addp">${t('add')}</button>

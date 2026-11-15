@@ -333,3 +333,7 @@ wzStep2T:'Jetzt nach deinen Wünschen einstellen',wzBudget:'Budget hinzufügen',
 wzStep3T:'Wie heißt du?',wzImIn:'Ich mache auch mit',wzStep3Hint:'Du machst mit diesem Namen mit: Du musst dich nicht noch einmal hinzufügen.',wzStep3HintNo:'Du organisierst nur: Du bist nicht in der Auslosung.',
 wzStep4T:'Wer macht noch mit?',wzStep4Hint:'Füge vor dem Auslosen alle hinzu. Die E-Mail ist optional: damit schickst du ihnen ihr Ergebnis.',you:'(Du)',wzDraw:'🎲 Auslosen',wzNeed:'Es fehlen {n} Teilnehmer',wzExcl:'🔒 Ausschlüsse hinzufügen (Premium)'}};
 for(const l in I18N_WZ)Object.assign(I18N[l],I18N_WZ[l]);
+const I18N_WZ2={es:{wzAddT:'Añadir participante',wzCount:'{n} en total'},en:{wzAddT:'Add participant',wzCount:'{n} in total'},
+pt:{wzAddT:'Adicionar participante',wzCount:'{n} no total'},fr:{wzAddT:'Ajouter un participant',wzCount:'{n} au total'},
+it:{wzAddT:'Aggiungi partecipante',wzCount:'{n} in totale'},de:{wzAddT:'Teilnehmer hinzufügen',wzCount:'{n} insgesamt'}};
+for(const l in I18N_WZ2)Object.assign(I18N[l],I18N_WZ2[l]);
