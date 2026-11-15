@@ -1,0 +1,69 @@
+# Prepara la app de Android para Google Play (archivo .aab) en los servidores de Expo.
+# Se lanza a mano desde GitHub → Actions → «App Android» → Run workflow.
+# La primera vez Expo crea y guarda la clave de firma de la app: no hay que hacer nada más.
+# Variables: DOMINIO, REVENUECAT_ANDROID_KEY, ADMOB_ANDROID_APP_ID y ADMOB_ANDROID_INTERSTITIAL (sin estos dos, anuncios de prueba).
+name: App Android
+
+on:
+  workflow_dispatch:
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: movil
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Comprobar el acceso a Expo
+        run: |
+          if [ -z "$EXPO_TOKEN" ]; then echo "::error title=Expo::Falta el secreto EXPO_TOKEN en GitHub."; exit 1; fi
+
+      - name: Página del sorteo dentro de la app
+        working-directory: .
+        env:
+          DOMINIO: ${{ vars.DOMINIO }}
+          EMAIL_SOPORTE: ${{ vars.EMAIL_SOPORTE }}
+          APPSTORE_ID: ${{ vars.APPSTORE_ID }}
+        run: node herramientas/construir.mjs app
+
+      - name: Instalar dependencias
+        run: |
+          for intento in 1 2 3; do
+            npm install --no-audit --no-fund > instalar.txt 2>&1 && exit 0
+            sleep 15
+          done
+          cat instalar.txt | tail -n 30
+          exit 1
+
+      - name: Enlazar con el proyecto de Expo
+        run: |
+          npx --yes eas-cli@latest init --non-interactive --force
+
+      - name: Claves de anuncios y pagos
+        run: |
+          ADMOB_APP="${{ vars.ADMOB_ANDROID_APP_ID }}"
+          if [ -n "$ADMOB_APP" ]; then
+            jq --arg id "$ADMOB_APP" '(.expo.plugins[] | select(type=="array" and .[0]=="react-native-google-mobile-ads") | .[1].androidAppId) = $id | .["react-native-google-mobile-ads"].android_app_id = $id' app.json > app.tmp && mv app.tmp app.json
+          else
+            echo "::warning title=Anuncios::Sin ADMOB_ANDROID_APP_ID: la app lleva anuncios de prueba de Google."
+          fi
+          jq --arg rc "${{ vars.REVENUECAT_ANDROID_KEY }}" --arg ad "${{ vars.ADMOB_ANDROID_INTERSTITIAL }}" \
+            '.build.production.env = ({} + (if $rc != "" then {EXPO_PUBLIC_REVENUECAT_ANDROID_KEY: $rc} else {} end) + (if $ad != "" then {EXPO_PUBLIC_ADMOB_ANDROID_INTERSTITIAL: $ad} else {} end))' eas.json > eas.tmp && mv eas.tmp eas.json
+
+      - name: Crear la app de Android (.aab)
+        run: |
+          if ! npx --yes eas-cli@latest build --platform android --profile production --non-interactive --no-wait --json > build.json 2> error.txt; then
+            cat build.json error.txt
+            echo "::error title=App Android::$(grep -v '^\s*$' error.txt | tail -n 12 | tr '\n' ' ' | cut -c1-1500)"
+            exit 1
+          fi
+          ID=$(node -e "const b=require('./build.json'); console.log((Array.isArray(b)?b[0]:b).id)")
+          echo "::notice title=App Android::Se está creando en Expo (tarda unos 15-30 minutos). Cuando acabe, el archivo .aab se descarga desde https://expo.dev/accounts/[cuenta]/projects/secretoogift/builds/$ID"

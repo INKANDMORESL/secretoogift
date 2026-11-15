@@ -1,0 +1,140 @@
+SECRETOOGIFT · TEXTOS PARA APP STORE CONNECT
+(Copiar y pegar. Entre corchetes, el límite de caracteres de Apple.)
+
+==================================================================
+DATOS GENERALES
+==================================================================
+Paquete (Bundle ID): app.secretoogift
+SKU: secretoogift
+Idioma principal: Español (España)
+Categoría principal: Estilo de vida · Secundaria: Utilidades
+Edad: 4+ (sin contenido sensible; los anuncios son no personalizados)
+URL de soporte: https://secretoogift.com/
+URL de marketing: https://secretoogift.com/
+URL de la política de privacidad: https://secretoogift.com/legal.html
+(Si el dominio final es otro, cambia secretoogift.com por el tuyo.)
+
+==================================================================
+ESPAÑOL (España)
+==================================================================
+Nombre [30]:
+Secretoogift: Amigo invisible
+
+Subtítulo [30]:
+Sorteo fácil y sin papelitos
+
+Texto promocional [170]:
+Organiza el amigo invisible en un minuto: apunta a todos, sortea y cada uno recibe su enlace secreto por correo o WhatsApp. Gratis y sin registro.
+
+Descripción [4000]:
+Secretoogift es la forma más fácil de organizar el amigo invisible con la familia, el trabajo o los amigos. Sin papelitos, sin trampas y sin que nadie se quede sin saber a quién le toca.
+
+CÓMO FUNCIONA
+1. Apunta a los participantes (y, si quieres, sus emails).
+2. Elige presupuesto y fecha con un toque.
+3. Sortea: nadie se toca a sí mismo.
+4. Cada uno descubre su amigo invisible con su enlace secreto, o pasad el móvil si estáis juntos.
+
+LO QUE MÁS GUSTA
+• Un enlace secreto para cada uno: solo ve su resultado. Ni el organizador lo ve, salvo que lo pida.
+• Mira quién ha abierto ya su enlace.
+• Envía todos los enlaces por correo de golpe, o uno a uno por WhatsApp.
+• Modo «pasar el móvil» para cuando estáis todos juntos.
+• Quien recibe el enlace no necesita la app: lo abre desde cualquier móvil u ordenador.
+• Sin registro, sin cuentas y sin contraseñas.
+• En 6 idiomas: español, inglés, portugués, francés, italiano y alemán.
+
+GRATIS O PREMIUM
+Gratis hasta 6 participantes, con un anuncio antes de ver cada resultado.
+El sorteo premium cuesta 0,99 € (pago único por sorteo, sin suscripción) e incluye:
+• Participantes ilimitados
+• Exclusiones (que parejas o hermanos no se toquen)
+• Sin anuncios
+• Edición total del sorteo
+• Tu nombre destacado como organizador
+• Ayuda personalizada
+
+¡Feliz amigo invisible!
+
+Palabras clave [100]:
+amigo invisible,sorteo,regalo,navidad,secret santa,reyes,papá noel,intercambio,regalos,familia
+
+Novedades de esta versión [4000]:
+Primera versión de Secretoogift. ¡Feliz amigo invisible!
+
+==================================================================
+ENGLISH (U.K.) — añadir como idioma en App Store Connect
+==================================================================
+Name [30]:
+Secretoogift: Secret Santa
+
+Subtitle [30]:
+Easy draw, no paper slips
+
+Promotional text [170]:
+Organise Secret Santa in a minute: add everyone, run the draw and each person gets their secret link by email or WhatsApp. Free, no sign-up.
+
+Description [4000]:
+Secretoogift is the easiest way to organise Secret Santa with family, work or friends. No paper slips, no cheating and nobody left wondering who they got.
+
+HOW IT WORKS
+1. Add the participants (and, if you like, their emails).
+2. Pick a budget and date in one tap.
+3. Draw: nobody gets themselves.
+4. Everyone finds out who they’re buying for with their secret link, or pass the phone around if you’re together.
+
+WHAT PEOPLE LOVE
+• A secret link for each person: they only see their own result. Even the organiser doesn’t, unless they ask.
+• See who has already opened their link.
+• Email all the links at once, or send them one by one on WhatsApp.
+• “Pass the phone” mode for when you’re all together.
+• People who get a link don’t need the app: it opens on any phone or computer.
+• No sign-up, no accounts, no passwords.
+• In 6 languages: English, Spanish, Portuguese, French, Italian and German.
+
+FREE OR PREMIUM
+Free for up to 6 participants, with one ad before each result.
+A premium draw costs €0.99 (one-off payment per draw, no subscription) and includes:
+• Unlimited participants
+• Exclusions (stop couples or siblings drawing each other)
+• No ads
+• Full editing of the draw
+• Your name highlighted as organiser
+• Personal support
+
+Happy Secret Santa!
+
+Keywords [100]:
+secret santa,gift exchange,christmas,draw,kris kringle,white elephant,presents,family,office,names
+
+What’s new [4000]:
+First version of Secretoogift. Happy Secret Santa!
+
+==================================================================
+COMPRA DENTRO DE LA APP
+==================================================================
+Tipo: Consumible
+ID de producto: secretoogift_sorteo_premium
+Nombre de referencia: Sorteo premium
+Precio: 0,99 €
+Nombre visible (ES): Sorteo premium
+Descripción (ES): Sin anuncios, exclusiones y participantes ilimitados en un sorteo.
+Nombre visible (EN): Premium draw
+Descripción (EN): No ads, exclusions and unlimited participants for one draw.
+Captura para la revisión: tienda/app-store/es-5.png
+
+==================================================================
+PRIVACIDAD DE LA APP (App Store Connect → Privacidad de la app)
+==================================================================
+¿Recopila datos? Sí.
+• Información de contacto → Dirección de correo electrónico: Funcionalidad de la app. No vinculada a la identidad. No se usa para rastreo.
+  (Son los emails de los participantes, solo para enviarles su enlace; se borran a los 120 días.)
+• Identificadores → ID del dispositivo: Publicidad de terceros (Google AdMob). No vinculada a la identidad. No se usa para rastreo
+  (anuncios solo no personalizados).
+• Datos de uso → Interacción con el producto: Publicidad de terceros (Google AdMob). No vinculada. No rastreo.
+• Compras → Historial de compras: Funcionalidad de la app (RevenueCat). No vinculada. No rastreo.
+
+==================================================================
+NOTAS PARA LA REVISIÓN DE APPLE
+==================================================================
+No hace falta cuenta ni contraseña. Para probar: «Nuevo sorteo» → escribe 3 nombres → «Guardar y sortear» → elige «Crear sorteo premium» (compra de prueba) o «No quiero estas ventajas» (versión gratis con anuncio). Luego «Pasar el móvil» → toca un nombre → toca el regalo para ver el resultado. En «Enviar enlaces» se puede mandar a cada persona su enlace por correo o WhatsApp.

@@ -1,0 +1,9 @@
+node_modules/
+.expo/
+dist/
+ios/
+android/
+*.log
+.env
+# Se genera al construir a partir de ../sorteo (node ../herramientas/construir.mjs app)
+src/web.ts

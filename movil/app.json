@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "name": "Secretoogift",
+    "slug": "secretoogift",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "secretoogift",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F5F8FF",
+    "icon": "./assets/icon.png",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.secretoogift",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleDevelopmentRegion": "es",
+        "CFBundleLocalizations": ["es", "en", "pt", "fr", "it", "de"],
+        "CFBundleAllowMixedLocalizations": true
+      }
+    },
+    "android": {
+      "package": "app.secretoogift",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "permissions": ["com.android.vending.BILLING"]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "imageWidth": 200,
+          "backgroundColor": "#0B3A7A"
+        }
+      ],
+      [
+        "react-native-google-mobile-ads",
+        {
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511",
+          "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+          "delayAppMeasurementInit": true
+        }
+      ]
+    ]
+  },
+  "react-native-google-mobile-ads": {
+    "ios_app_id": "ca-app-pub-3940256099942544~1458002511",
+    "android_app_id": "ca-app-pub-3940256099942544~3347511713",
+    "delay_app_measurement_init": true
+  }
+}

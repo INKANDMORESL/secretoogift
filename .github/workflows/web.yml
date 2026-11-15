@@ -1,0 +1,52 @@
+# Publica la web (portada + /sorteo/ con su servidor api.php) en IONOS.
+# Secrets: IONOS_HOST, IONOS_USUARIO, IONOS_CONTRASENA (acceso SFTP limitado a la carpeta del dominio).
+# Variables: DOMINIO, EMAIL_SOPORTE, EMAIL_REMITENTE, APPSTORE_ID (cuando la app esté publicada) e IONOS_CARPETA (opcional).
+# Nunca se borra nada del servidor (tampoco sorteo/data, donde están los sorteos).
+# Si faltan los datos de acceso, deja un .zip para subirlo con FileZilla.
+name: Web
+
+on:
+  push:
+    branches: [main]
+    paths: ['web/**', 'sorteo/**', 'servidor/**', 'herramientas/**', '.github/workflows/web.yml']
+  workflow_dispatch:
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Construir la web
+        env:
+          DOMINIO: ${{ vars.DOMINIO }}
+          EMAIL_SOPORTE: ${{ vars.EMAIL_SOPORTE }}
+          EMAIL_REMITENTE: ${{ vars.EMAIL_REMITENTE }}
+          APPSTORE_ID: ${{ vars.APPSTORE_ID }}
+        run: node herramientas/construir.mjs web publicar
+
+      - name: Guardar copia para FileZilla
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-secretoogift
+          path: publicar
+
+      - name: Subir a IONOS
+        env:
+          HOST: ${{ secrets.IONOS_HOST }}
+          USUARIO: ${{ secrets.IONOS_USUARIO }}
+          CONTRASENA: ${{ secrets.IONOS_CONTRASENA }}
+          CARPETA: ${{ vars.IONOS_CARPETA }}
+        run: |
+          if [ -z "$HOST" ] || [ -z "$USUARIO" ] || [ -z "$CONTRASENA" ]; then
+            echo "::warning title=IONOS::Faltan los datos de acceso en GitHub. Descarga 'web-secretoogift' de esta ejecución y súbela con FileZilla."
+            exit 0
+          fi
+          sudo apt-get install -y lftp > /dev/null
+          DESTINO="${CARPETA:-.}"
+          lftp -u "$USUARIO","$CONTRASENA" "sftp://$HOST" -e "set sftp:auto-confirm yes; set net:max-retries 3; mirror -R --verbose --no-perms --exclude-glob sorteo/data/ publicar \"$DESTINO\"; bye"
+          echo "::notice title=Web::Publicada en https://${{ vars.DOMINIO || 'secretoogift.com' }}"

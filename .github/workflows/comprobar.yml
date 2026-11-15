@@ -1,0 +1,64 @@
+# Comprueba en cada cambio que la web y la app se construyen bien.
+# Si las versiones de los paquetes no encajan con Expo, las arregla solo (expo install --fix) y guarda el cambio.
+name: Comprobar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Construir la web y la página del sorteo
+        env:
+          DOMINIO: ${{ vars.DOMINIO }}
+        run: |
+          node herramientas/construir.mjs web publicar
+          node herramientas/construir.mjs app
+          node -e "const s=require('fs').readFileSync('publicar/sorteo/index.html','utf8');const m=s.match(/<script>([\s\S]*)<\/script>/);require('fs').writeFileSync('/tmp/sorteo.js',m[1])"
+          node --check /tmp/sorteo.js || { echo "::error title=Sorteo::La página del sorteo tiene un error de JavaScript"; exit 1; }
+          php -l publicar/sorteo/api.php
+
+      - name: Instalar dependencias de la app
+        working-directory: movil
+        run: |
+          for intento in 1 2 3; do
+            npm install --no-audit --no-fund > instalar.txt 2>&1 && exit 0
+            sleep 15
+          done
+          echo "::error title=Instalar dependencias::$(grep -iE 'npm (error|ERR)' instalar.txt | head -n 8 | tr '\n' ' ' | cut -c1-900)"
+          exit 1
+
+      - name: Versiones compatibles con Expo (se arreglan solas)
+        working-directory: movil
+        run: |
+          if npx expo install --check > salida.txt 2>&1; then cat salida.txt; exit 0; fi
+          cat salida.txt
+          npx expo install --fix
+          if [ "${{ github.event_name }}" = "push" ] && ! git diff --quiet package.json; then
+            git config user.name "github-actions"; git config user.email "github-actions@users.noreply.github.com"
+            git add package.json
+            git commit -m "Versiones de paquetes compatibles con Expo"
+            git pull --rebase && git push
+            echo "::notice title=Versiones::Arregladas y guardadas en package.json"
+          fi
+
+      - name: Comprobar el código (TypeScript)
+        working-directory: movil
+        run: |
+          npx tsc --noEmit > salida.txt 2>&1 && { cat salida.txt; exit 0; }
+          cat salida.txt
+          grep -v '^\s*$' salida.txt | tail -n 12 | while IFS= read -r l; do echo "::error title=TypeScript::$l"; done
+          exit 1
