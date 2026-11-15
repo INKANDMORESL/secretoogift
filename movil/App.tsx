@@ -1,23 +1,28 @@
 // Secretoogift: la app es la página del sorteo (sorteo/ → src/web.ts) dentro de un WebView,
 // con lo nativo que la web no puede hacer sola: anuncios (AdMob), pago del sorteo premium (RevenueCat),
 // copiar, compartir, abrir WhatsApp/correo y abrir los enlaces de resultado (secretoogift://r#código).
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, type ComponentType } from 'react';
 import { BackHandler, Linking, Platform, Share, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import * as Clipboard from 'expo-clipboard';
 import * as SplashScreen from 'expo-splash-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { WebView, type WebViewMessageEvent } from 'react-native-webview';
+import { WebView as WebViewOriginal, type WebViewMessageEvent } from 'react-native-webview';
 import HTML, { DOMINIO } from './src/web';
 import { mostrarAnuncio, prepararAnuncios } from './src/anuncios';
 import { comprarPremium, prepararPagos } from './src/pagos';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
+// Los tipos de react-native-webview no encajan con los de esta versión de React Native: se usa sin tipos estrictos.
+type ControlWeb = { injectJavaScript: (js: string) => void };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const WebView = WebViewOriginal as unknown as ComponentType<any>;
+
 const BASE = `https://${DOMINIO}/sorteo/`;
 
 // Saca el código del resultado de un enlace: https://dominio/sorteo/#abc… o secretoogift://r#abc…
-function codigoDe(url: string | null): string | null {
+function codigoDe(url: string | null | undefined): string | null {
   if (!url) return null;
   const i = url.indexOf('#');
   if (i < 0) return null;
@@ -28,7 +33,7 @@ function codigoDe(url: string | null): string | null {
 type Mensaje = { id?: number; tipo?: string; datos?: Record<string, unknown> };
 
 export default function App() {
-  const web = useRef<WebView>(null);
+  const web = useRef<ControlWeb | null>(null);
   const cargada = useRef(false);
   const pendiente = useRef<string | null>(null);
 
@@ -125,7 +130,7 @@ export default function App() {
                 abrirCodigo(c);
               }
             }}
-            onShouldStartLoadWithRequest={(r) => {
+            onShouldStartLoadWithRequest={(r: { url?: string }) => {
               const url = r.url || '';
               if (url === BASE || url.startsWith(BASE + '#') || url.startsWith('about:') || url.startsWith('data:')) return true;
               Linking.openURL(url).catch(() => {});
