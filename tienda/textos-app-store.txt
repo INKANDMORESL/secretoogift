@@ -138,3 +138,20 @@ PRIVACIDAD DE LA APP (App Store Connect → Privacidad de la app)
 NOTAS PARA LA REVISIÓN DE APPLE
 ==================================================================
 No hace falta cuenta ni contraseña. Para probar: «Nuevo sorteo» → escribe 3 nombres → «Guardar y sortear» → elige «Crear sorteo premium» (compra de prueba) o «No quiero estas ventajas» (versión gratis con anuncio). Luego «Pasar el móvil» → toca un nombre → toca el regalo para ver el resultado. En «Enviar enlaces» se puede mandar a cada persona su enlace por correo o WhatsApp.
+
+==================================================================
+GOOGLE PLAY (para cuando salga la versión de Android)
+==================================================================
+Imágenes: carpeta google-play/ (icono-512.png, grafico-es.png / grafico-en.png de 1024x500, capturas 1080x1920).
+Categoría: Estilo de vida · Etiquetas: Navidad, regalos, fiestas.
+Clasificación de contenido: para todos (anuncios: sí; compras en la app: sí).
+
+Español
+Nombre de la app [30]: Secretoogift: Amigo invisible
+Descripción breve [80]: Organiza el amigo invisible en un minuto. Enlaces secretos, sin registro.
+Descripción completa [4000]: la misma que la de la App Store (arriba).
+
+English
+App name [30]: Secretoogift: Secret Santa
+Short description [80]: Organise Secret Santa in a minute. Secret links, no sign-up.
+Full description [4000]: the same as the App Store one (above).
