@@ -48,6 +48,9 @@ function rate_limit($what, $max) {
   $list[] = $now; file_put_contents($f, json_encode($list), LOCK_EX);
 }
 
+// ---- Envío de correo: SMTP de IONOS (si está configurado en correo.php) o, si no, mail() ----
+require_once __DIR__ . '/correo-smtp.php';
+
 // Limpieza ocasional de sorteos antiguos
 if (mt_rand(1, 50) === 1) {
   foreach (glob("$DIR/*.json") as $f) { if (filemtime($f) < time() - KEEP_DAYS * 86400) @unlink($f); }
@@ -135,13 +138,7 @@ switch ($a) {
       if (!$to) continue;
       $subject = mb_substr(str_replace(["\r", "\n"], ' ', (string)($it['s'] ?? '')), 0, 150);
       $body = mb_substr((string)($it['b'] ?? ''), 0, 3000);
-      $headers = "From: =?UTF-8?B?" . base64_encode(FROM_NAME) . "?= <" . FROM_EMAIL . ">\r\n"
-               . "MIME-Version: 1.0\r\n"
-               . "Content-Type: text/plain; charset=UTF-8\r\n"
-               . "Content-Transfer-Encoding: 8bit\r\n";
-      if (@mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', $body, $headers, '-f' . FROM_EMAIL)) {
-        $sent++; $draw['mails']++;
-      }
+      if (enviar_correo($to, $subject, $body)) { $sent++; $draw['mails']++; }
     }
     store($d, $draw);
     out(['sent' => $sent]);

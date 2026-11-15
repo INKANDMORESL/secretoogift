@@ -58,7 +58,8 @@ if (modo === 'web') {
   copiar(path.join(RAIZ, 'web'), salida);
   fs.mkdirSync(path.join(salida, 'sorteo'), { recursive: true });
   fs.writeFileSync(path.join(salida, 'sorteo/index.html'), paginaSorteo(cssFuentes((f) => `../fonts/${f}`)));
-  fs.writeFileSync(path.join(salida, 'sorteo/api.php'), poner(leer('servidor/api.php')));
+  for (const f of fs.readdirSync(path.join(RAIZ, 'servidor')).filter((f) => f.endsWith('.php')))
+    fs.writeFileSync(path.join(salida, 'sorteo', f), poner(leer('servidor/' + f)));
   console.log(`Web lista en ${salida} (dominio ${DOMINIO})`);
 } else if (modo === 'app') {
   const b64 = (f) => `data:font/woff;base64,${fs.readFileSync(path.join(RAIZ, 'web/fonts', f)).toString('base64')}`;

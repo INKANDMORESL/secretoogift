@@ -29,7 +29,7 @@ jobs:
           node herramientas/construir.mjs app
           node -e "const s=require('fs').readFileSync('publicar/sorteo/index.html','utf8');const m=s.match(/<script>([\s\S]*)<\/script>/);require('fs').writeFileSync('/tmp/sorteo.js',m[1])"
           node --check /tmp/sorteo.js || { echo "::error title=Sorteo::La página del sorteo tiene un error de JavaScript"; exit 1; }
-          php -l publicar/sorteo/api.php
+          for f in publicar/sorteo/*.php; do php -l "$f"; done
 
       - name: Instalar dependencias de la app
         working-directory: movil

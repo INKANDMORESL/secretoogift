@@ -203,6 +203,8 @@ footer a:hover{text-decoration:underline}
 </div></footer>
 
 <script>
+// Enlace corto de un sorteo (https://dominio/#Ab3xK9): a la página del resultado
+if(/^#[0-9A-Za-z]{4,16}$/.test(location.hash))location.replace('/sorteo/'+location.hash);
 // ===== CONFIGURA AQUÍ =====
 const APPSTORE_ID  = '__APPSTORE_ID__';   // se pone al publicar (variable APPSTORE_ID de GitHub)
 const APPSTORE_URL = /^\d+$/.test(APPSTORE_ID) ? 'https://apps.apple.com/app/id'+APPSTORE_ID : '';

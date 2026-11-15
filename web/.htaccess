@@ -1,3 +1,0 @@
-# Enlaces cortos de los sorteos: /s/Ab3xK9 → /sorteo/#Ab3xK9
-RewriteEngine On
-RewriteRule ^s/([A-Za-z0-9]+)/?$ /sorteo/#$1 [R=302,NE,L]

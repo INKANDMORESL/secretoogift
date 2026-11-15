@@ -287,8 +287,8 @@ const LINK_BASE=(/^https?:$/.test(location.protocol)&&!/claude|anthropic|claudeu
   : 'https://__DOMINIO__/sorteo/';
 const APPSTORE_URL='https://apps.apple.com/app/id__APPSTORE_ID__'; // se pone al construir (variable APPSTORE_ID de GitHub)
 const AD_SECONDS=5;
-// Enlace corto (https://dominio/s/Ab3xK9) cuando el servidor ya lo ha guardado; si no, el largo con todo dentro
-const SHORT_BASE=LINK_BASE.replace(/\/sorteo\/.*$/,'/s/');
+// Enlace corto (https://dominio/#Ab3xK9) cuando el servidor ya lo ha guardado; si no, el largo con todo dentro
+const SHORT_BASE=LINK_BASE.replace(/\/sorteo\/.*$/,'/#');   // https://dominio/#Ab3xK9 (la portada lo pasa a /sorteo/)
 const linkFor=(g,fromId)=>{const p=g.people.find(x=>x.id===fromId);
   return p&&p.short&&g.synced?SHORT_BASE+p.short:LINK_BASE+'#'+codeFor(g,fromId)};
 const esCorto=h=>/^[0-9A-Za-z]{4,16}$/.test(h)&&!/^[0-9a-f]{40,}$/i.test(h);

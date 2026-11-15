@@ -19,7 +19,7 @@
   Tipos: `anuncio` (AdMob intersticial, `src/anuncios.ts`, solo no personalizados + aviso de consentimiento UE),
   `comprar` (RevenueCat, `src/pagos.ts`), `copiar`, `compartir`, `abrir` (enlaces de fuera), `atras` (Android).
   En la web, `IS_APP` = `window.IS_NATIVE_APP`. Enlaces de resultado: `secretoogift://r#código` o https://DOMINIO/sorteo/#código.
-- Enlaces cortos: https://DOMINIO/s/Ab3xK9 (`web/.htaccess` redirige a /sorteo/#Ab3xK9; `api.php?a=get` da el código largo cifrado).
+- Enlaces cortos: https://DOMINIO/#Ab3xK9 (la portada `web/index.html` lo pasa a /sorteo/#Ab3xK9; `api.php?a=get` da el código largo cifrado). Sin .htaccess: en IONOS la redirección /s/… no funcionaba.
   En el navegador solo se ven resultados de sorteos PREMIUM; los gratis piden descargar la app (y allí, anuncio). Sin enlace, /sorteo/ redirige a la portada: los sorteos solo se crean en la app.
 - `servidor/api.php`: PHP sin base de datos (JSON en `sorteo/data/`, se borra a los 120 días). Acciones: register (devuelve `cortos`), get, open,
   status, mail (solo a emails guardados, límite por sorteo). Remitente FROM_EMAIL = EMAIL_REMITENTE.
@@ -41,5 +41,5 @@
 ## Pendiente
 - Universal links (abrir la app directamente desde https://DOMINIO/sorteo/#…): necesita Associated Domains en Apple y
   `.well-known/apple-app-site-association`. De momento, la web ofrece «Ya tengo la app: abrir» (secretoogift://) y la App Store.
-- Si `mail()` de IONOS cae en spam: pasar a SMTP de IONOS.
+- Correo: `servidor/correo-smtp.php` envía por SMTP (smtp.ionos.es:587, STARTTLS) si existe `sorteo/data/correo.json`, que se crea desde la página privada `/sorteo/correo.php` (el dueño escribe ahí la contraseña del buzón). Si no, mail() (en IONOS dice «enviado» pero no llega). Errores en `sorteo/data/correo-errores.log`.
 - `react-native-google-mobile-ads` está en "latest": fijar la versión cuando funcione la primera compilación.
