@@ -138,7 +138,8 @@ switch ($a) {
       if (!$to) continue;
       $subject = mb_substr(str_replace(["\r", "\n"], ' ', (string)($it['s'] ?? '')), 0, 150);
       $body = mb_substr((string)($it['b'] ?? ''), 0, 3000);
-      if (enviar_correo($to, $subject, $body)) { $sent++; $draw['mails']++; }
+      $html = is_array($it['h'] ?? null) ? correo_html($it['h']) : null;
+      if (enviar_correo($to, $subject, $body, $html)) { $sent++; $draw['mails']++; }
     }
     store($d, $draw);
     out(['sent' => $sent]);

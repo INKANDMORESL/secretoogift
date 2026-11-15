@@ -133,6 +133,7 @@ function render(){
   else if(v.name==='code')a.innerHTML=codeView();
   else if(v.name==='mine')a.innerHTML=mineView();
   else if(v.name==='paywall')a.innerHTML=paywallView();
+  else if(v.name==='send')a.innerHTML=sendView();
   bind();
 }
 
@@ -214,9 +215,6 @@ function editView(){
 
 function groupView(){
   const g=getGroup(view.id);if(!g){return homeView()}
-  const tab=view.tab||'pass';
-  const seen=Object.keys(g.seen||{}).length;
-  const av=p=>`<div class="avatar" style="background:${colorFor(p.name)};width:38px;height:38px;font-size:16px;border-radius:12px">${esc(p.name[0]).toUpperCase()}</div>`;
   return `<div class="top"><button class="back" data-act="home">‹</button><h2 style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(g.name)}</h2>
   <button class="btn ghost sm" data-act="edit">${t('edit')}</button></div>
   <div class="card row" style="justify-content:space-around;text-align:center">
@@ -224,20 +222,12 @@ function groupView(){
     <div><div class="stat">${esc(g.budget||'—')}</div><div class="muted small">${t('statBudget')}</div></div>
     <div><div class="stat" style="font-size:18px;line-height:1.35">${g.date?esc(fmtDate(g.date,true)):'—'}</div><div class="muted small">${t('statDate')}</div></div>
   </div>
-  <div class="tabs"><button class="${tab==='pass'?'on':''}" data-tab="pass">${t('tabPass')}</button><button class="${tab==='send'?'on':''}" data-tab="send">${t('tabSend')}</button></div>
-  ${tab==='pass'?`
-    <p class="muted small" style="margin-bottom:12px">${t('passHint',{seen,total:g.people.length})}</p>
-    ${g.people.map(p=>`<button class="person ${g.seen&&g.seen[p.id]?'seen':''}" data-pass="${p.id}">${av(p)}
-      <span class="name">${esc(p.name)}</span><span class="muted">${g.seen&&g.seen[p.id]?t('seen'):t('view')}</span></button>`).join('')}
-  `:`
-    <p class="muted small" style="margin-bottom:12px">${t('sendHint')}</p>
-    ${apiOk&&g.synced?(()=>{const n=g.people.filter(p=>g.opened&&g.opened[p.tok]).length,m=g.people.filter(p=>p.email).length;
-      return `<div class="card row" style="padding:12px 14px"><span style="flex:1;font-weight:600">${t('openedCount',{n,total:g.people.length})}</span><button class="btn ghost sm" data-act="refresh" aria-label="↻">↻</button></div>
-      ${m?`<button class="btn dark" data-act="sendall" style="margin-bottom:12px">${t('sendAll',{n:m})}</button>`:''}`})():''}
-    ${g.people.map(p=>`<button class="person" data-code="${p.id}">${av(p)}
-      <span class="name">${esc(p.name)}${p.email?`<br><span class="muted small" style="font-weight:400">✉️ ${esc(p.email)}</span>`:''}</span>
-      ${apiOk&&g.synced?(g.opened&&g.opened[p.tok]?`<span class="st ok">${t('opened')}</span>`:`<span class="st">${t('pending')}</span>`):`<span class="muted">${t('send')}</span>`}</button>`).join('')}
-  `}
+  <button class="btn primary big" data-act="enviar">${t('sendResults')}</button>
+  <div class="card" style="margin-top:14px">
+    <div class="row" style="margin-bottom:6px"><h3 style="flex:1">${t('participants')}</h3>${apiOk&&g.synced?`<button class="btn ghost sm" data-act="refresh" aria-label="↻">↻</button>`:''}</div>
+    ${apiOk&&g.synced?`<p class="muted small" style="margin-bottom:8px">${t('openedCount',{n:g.people.filter(p=>g.opened&&g.opened[p.tok]).length,total:g.people.length})}</p>`:''}
+    ${g.people.map(p=>`<div class="prow">${avatar(p)}<span class="name">${esc(p.name)}</span>${estado(g,p)}</div>`).join('')}
+  </div>
   ${g.premium?`<div class="card prem" style="margin-top:16px"><h3>${t('premCard')}</h3>
     ${g.organizer?`<p class="small" style="margin-top:4px">${t('organizes')} <b>${esc(g.organizer)}</b></p>`:''}
     <p class="muted small" style="margin-top:6px">${t('help',{email:SUPPORT})}</p></div>`
@@ -246,6 +236,43 @@ function groupView(){
     <button class="btn line" data-act="redraw">${t('redraw')}</button>
     <button class="btn line" data-act="spoiler">${t('spoiler')}</button>
   </div>`;
+}
+const avatar=(p,sz=38)=>`<div class="avatar" style="background:${colorFor(p.name)};width:${sz}px;height:${sz}px;font-size:16px;border-radius:12px">${esc(p.name[0]).toUpperCase()}</div>`;
+// Estado de cada persona: abierto (servidor) > visto en el móvil > enviado > pendiente
+function estado(g,p){
+  if(apiOk&&g.synced&&g.opened&&g.opened[p.tok])return `<span class="st ok">${t('opened')}</span>`;
+  if(g.seen&&g.seen[p.id])return `<span class="st ok">${t('seen')}</span>`;
+  if(g.enviado&&g.enviado[p.id])return `<span class="st sent">${t('sentMark')}</span>`;
+  return `<span class="st">${t('pending')}</span>`;
+}
+function marcarEnviado(g,ids){g.enviado=g.enviado||{};ids.forEach(id=>g.enviado[id]=1);save()}
+
+// «Enviar resultados»: elegir cómo (WhatsApp, correo o pasando el móvil), cada opción explicada
+function sendView(){
+  const g=getGroup(view.id);if(!g)return homeView();
+  const modo=view.modo;
+  const atras=`<div class="top"><button class="back" data-act="${modo?'sendmenu':'togroup'}">‹</button><h2>${modo==='wa'?t('optWaT'):modo==='mail'?t('optMailT'):modo==='pass'?t('optPassT'):t('sendResultsT')}</h2></div>`;
+  if(!modo)return atras+`<p class="muted" style="margin-bottom:14px">${t('sendHow')}</p>
+    ${[['wa','💬',t('optWaT'),t('optWaX')],['mail','✉️',t('optMailT'),t('optMailX')],['pass','📱',t('optPassT'),t('optPassX')]].map(([m,e,ti,x])=>
+      `<button class="opt" data-act="modo" data-m="${m}"><span class="e">${e}</span><span><b>${ti}</b><span class="muted small">${x}</span></span><span class="muted">›</span></button>`).join('')}`;
+  if(modo==='pass')return atras+`<div class="howto">${t('passSteps')}</div>
+    ${g.people.map(p=>`<button class="person ${g.seen&&g.seen[p.id]?'seen':''}" data-pass="${p.id}">${avatar(p)}
+      <span class="name">${esc(p.name)}</span><span class="muted">${g.seen&&g.seen[p.id]?t('seen'):t('view')}</span></button>`).join('')}`;
+  if(modo==='wa')return atras+`<div class="howto">${t('waSteps')}</div>
+    ${g.people.map(p=>`<div class="prow">${avatar(p)}<span class="name">${esc(p.name)}<br>${estado(g,p)}</span>
+      <button class="btn wa sm" data-act="wa" data-pid="${p.id}">${t('sendBtn')}</button>
+      <button class="btn ghost sm" data-code="${p.id}" aria-label="${esc(t('more'))}">⋯</button></div>`).join('')}`;
+  // Correo
+  const conEmail=g.people.filter(p=>p.email);
+  const servidor=apiOk&&g.synced;
+  return atras+`<div class="howto">${t('mailSteps')}</div>
+    ${servidor&&conEmail.length?`<button class="btn dark" data-act="sendall" style="margin-bottom:12px">${t('sendAll',{n:conEmail.length})}</button>`:''}
+    ${!conEmail.length?`<p class="muted small" style="margin-bottom:10px">${t('noEmailsYet')}</p>`:''}
+    ${g.people.map(p=>p.email?`<div class="prow">${avatar(p)}<span class="name">${esc(p.name)}<br><span class="muted small" style="font-weight:400">${esc(p.email)}</span></span>
+        ${servidor?estado(g,p):`<a class="btn dark sm" href="mailto:${encodeURIComponent(p.email)}?subject=${encodeURIComponent(t('subject',{group:g.name}))}&body=${encodeURIComponent(msgFor(g,p))}" data-act="mailto" data-pid="${p.id}">${t('sendBtn')}</a>`}</div>`
+      :`<div class="prow">${avatar(p)}<span class="name" style="min-width:0">${esc(p.name)}
+        <span class="row" style="margin-top:6px;gap:6px"><input id="em-${p.id}" type="email" inputmode="email" autocapitalize="off" placeholder="${esc(t('emailPh'))}" style="height:40px;padding:8px 10px;font-size:15px">
+        <button class="btn ghost sm" data-act="saveemail" data-pid="${p.id}">${t('saveBtn')}</button></span></span></div>`).join('')}`;
 }
 
 function metaLine(b,d){return `${b?esc(t('budgetLbl',{b})):''}${b&&d?' · ':''}${d?fmtDate(d):''}`}
@@ -269,7 +296,7 @@ async function syncGroup(g){
   try{const r=await api('register',{},{d:g.id,k:g.key,people:g.people.map(p=>({t:p.tok,n:p.name,e:p.email||'',c:codeFor(g,p.id)}))});
     const cortos=r.cortos||{};g.people.forEach(p=>{if(cortos[p.tok])p.short=cortos[p.tok]});
     g.synced=true;save();
-    if((view.name==='code'||view.name==='group')&&view.id===g.id)render()}catch(e){}
+    if(['code','group','send'].includes(view.name)&&view.id===g.id)render()}catch(e){}
 }
 async function refreshStatus(id){
   const g=getGroup(id);if(!g||!apiOk)return;
@@ -337,6 +364,13 @@ function passView(){
   <button class="btn dark" data-act="hide">${t('hide')}</button></div>`;
 }
 
+// Textos del correo «corporativo» (el servidor monta el diseño)
+function htmlFor(g,p){
+  const datos=[g.budget?t('budgetLbl',{b:g.budget}):'',g.date?t('mailDate',{d:fmtDate(g.date)}):''].filter(Boolean);
+  return {lang:LANG,hola:t('mailHello',{name:p.name}),intro:t('mailIntro',{group:g.name}),datos,boton:t('mailBtn'),link:linkFor(g,p.id),
+    nota:g.premium?'':t('msgNeedApp').trim(),secreto:t('mailSecret'),
+    org:g.premium&&g.organizer?t('msgOrg',{o:g.organizer}).trim():'',pie:t('mailFooter')};
+}
 function msgFor(g,p){
   const extra=(g.budget?t('msgBudget',{b:g.budget}):'')+(g.date?t('msgDate',{d:fmtDate(g.date)}):'');
   const org=g.premium&&g.organizer?t('msgOrg',{o:g.organizer}):'';
@@ -404,8 +438,9 @@ function addPerson(){
   draft.people.push({id:uid(),name:n,email:em});render();setTimeout(()=>document.getElementById('pname').focus(),0);
 }
 async function sendMails(g,list){
-  try{const r=await api('mail',{},{d:g.id,k:g.key,items:list.map(p=>({t:p.tok,s:t('subject',{group:g.name}),b:msgFor(g,p)}))});
-    toast(t('toastSent',{n:r.sent}))}catch(e){toast(t('sendFail'))}
+  try{const r=await api('mail',{},{d:g.id,k:g.key,items:list.map(p=>({t:p.tok,s:t('subject',{group:g.name}),b:msgFor(g,p),h:htmlFor(g,p)}))});
+    if(r.sent>0)marcarEnviado(g,list.map(p=>p.id));
+    toast(r.sent>0?t('toastSent',{n:r.sent}):t('sendFail'));render()}catch(e){toast(t('sendFail'))}
 }
 function doDraw(g){
   const res=draw(g);
@@ -421,8 +456,8 @@ function bind(){
     if(el.classList.contains('gift')){if(view.name==='mine'){view.stage=(view.data.p||!IS_APP)?'result':'ad'}else view.open=true;render();return}
     if(el.dataset.open){go({name:'group',id:el.dataset.open,tab:'pass'});return}
     if(el.dataset.tab){view.tab=el.dataset.tab;render();return}
-    if(el.dataset.pass){go({name:'pass',id:view.id,pid:el.dataset.pass,tab:view.tab});return}
-    if(el.dataset.code){go({name:'code',id:view.id,pid:el.dataset.code,tab:view.tab});return}
+    if(el.dataset.pass){go({name:'pass',id:view.id,pid:el.dataset.pass,from:{name:'send',id:view.id,modo:'pass'}});return}
+    if(el.dataset.code){go({name:'code',id:view.id,pid:el.dataset.code,from:{name:view.name,id:view.id,modo:view.modo}});return}
     if(el.dataset.delp){readDraftFields();const id=el.dataset.delp;draft.people=draft.people.filter(p=>p.id!==id);draft.exclusions=draft.exclusions.filter(x=>!x.includes(id));render();return}
     if(el.dataset.delex){readDraftFields();draft.exclusions.splice(+el.dataset.delex,1);render();return}
     switch(act){
@@ -441,7 +476,7 @@ function bind(){
           const g=JSON.parse(JSON.stringify(draft));const isNew=g._new;delete g._new;
           if(!doDraw(g)){go({name:'edit'});setTimeout(()=>showErr(t('errImpossible')),0);return}
           if(isNew)state.groups.unshift(g);else{const i=state.groups.findIndex(x=>x.id===g.id);state.groups[i]=g}
-          save();syncGroup(g);draft=null;toast(t('toastDone'));go({name:'group',id:g.id,tab:'pass'});
+          save();syncGroup(g);draft=null;toast(t('toastDone'));go({name:'group',id:g.id});
         };
         if(draft._new&&!draft.premium)openPaywall({target:'draft',back:{name:'edit'},after:finish,allowFree:true,onFree:finish});
         else finish();
@@ -461,8 +496,19 @@ function bind(){
       case 'redraw':modal({title:t('mRedrawT'),text:esc(t('mRedrawX')),ok:t('mRedrawOk'),danger:true,onOk:()=>{const g=getGroup(view.id);doDraw(g);save();syncGroup(g);toast(t('toastRedraw'));render()}});break;
       case 'spoiler':modal({title:t('mSpoilT'),text:esc(t('mSpoilX')),ok:t('mSpoilOk'),onOk:()=>{const g=getGroup(view.id);
         modal({title:t('results'),text:`<div style="margin-top:8px">${g.people.map(p=>`<div class="list-res"><span>${esc(p.name)}</span><span>→ ${esc(pName(g,g.assignments[p.id]))}</span></div>`).join('')}</div>`,ok:t('close'),noCancel:true})}});break;
-      case 'togroup':go({name:'group',id:view.id,tab:view.tab});break;
-      case 'hide':{const g=getGroup(view.id);g.seen=g.seen||{};g.seen[view.pid]=true;save();go({name:'group',id:view.id,tab:'pass'});break}
+      case 'togroup':go(view.from||{name:'group',id:view.id});break;
+      case 'enviar':go({name:'send',id:view.id});break;
+      case 'sendmenu':go({name:'send',id:view.id});break;
+      case 'modo':go({name:'send',id:view.id,modo:el.dataset.m});break;
+      case 'wa':{const g=getGroup(view.id),p=g.people.find(x=>x.id===el.dataset.pid);
+        const url='https://wa.me/?text='+encodeURIComponent(msgFor(g,p));
+        marcarEnviado(g,[p.id]);if(IS_APP)nativo('abrir',{url});else window.open(url,'_blank');render();break}
+      case 'mailto':{const g=getGroup(view.id);marcarEnviado(g,[el.dataset.pid]);setTimeout(render,300);break}
+      case 'saveemail':{const g=getGroup(view.id),p=g.people.find(x=>x.id===el.dataset.pid);
+        const v=(document.getElementById('em-'+p.id).value||'').trim();
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){toast(t('errEmail'));return}
+        p.email=v;g.synced=false;save();render();syncGroup(g);break}
+      case 'hide':{const g=getGroup(view.id);g.seen=g.seen||{};g.seen[view.pid]=true;save();go(view.from||{name:'send',id:view.id,modo:'pass'});break}
       case 'copymsg':copy(view._msg,t('copiedMsg'));break;
       case 'sharemsg':nativo('compartir',{texto:view._msg});break;
       case 'adnext':adNext();break;
