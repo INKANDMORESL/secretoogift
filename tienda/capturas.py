@@ -78,14 +78,21 @@ with sync_playwright() as p:
         def shot(n):
             pg.add_style_tag(content=CSS); pg.wait_for_timeout(700); pg.screenshot(path=f'/tmp/cap_{l}_{n}.png')
         pg.goto(U); pg.wait_for_timeout(600); shot(1)
-        pg.click('[data-act=new]'); pg.fill('#gname', GRUPO[l])
-        for n in ns[:5]:
-            pg.fill('#pname', n); pg.press('#pname', 'Enter'); pg.press('#pemail', 'Enter')
-        pg.click('[data-act=bud] >> nth=1'); pg.click('[data-act=dt] >> nth=0'); pg.evaluate('window.scrollTo(0,0)'); shot(2)
-        pg.click('[data-act=back]'); pg.click('[data-open]'); pg.wait_for_timeout(500); pg.click('[data-tab=send]'); shot(3)
-        pg.click('[data-tab=pass]'); pg.click('[data-pass] >> nth=0'); shot(4)
-        pg.click('[data-act=togroup]'); pg.click('[data-act=home]'); pg.click('[data-act=new]')
-        pg.fill('#gname', 'x'); pg.click('[data-act=unlock]'); shot(5)
+        # 2: nuevo sorteo paso a paso (último paso: participantes)
+        pg.click('[data-act=new]'); pg.fill('#wz-name', GRUPO[l]); pg.click('#wz-next')
+        pg.click('[data-k=conPres]'); pg.click('[data-k=conFecha]'); pg.click('#wz-next')
+        pg.fill('#wz-org', ns[0]); pg.click('#wz-next')
+        for n in ns[1:5]:
+            pg.fill('#pname', n); pg.fill('#pemail', n.lower() + '@mail.com'); pg.press('#pemail', 'Enter')
+        pg.evaluate('window.scrollTo(0,0)'); shot(2)
+        # 3: enviar por correo, con quién lo ha abierto
+        pg.click('[data-act=home]'); pg.click('[data-open]'); pg.wait_for_timeout(600)
+        pg.click('[data-act=enviar]'); pg.click('[data-m=mail]'); pg.wait_for_timeout(300); shot(3)
+        # 4: pasar el móvil → el regalo
+        pg.click('[data-act=sendmenu]'); pg.click('[data-m=pass]'); pg.click('[data-pass] >> nth=0'); shot(4)
+        # 5: oferta premium
+        pg.goto(U); pg.wait_for_timeout(400); pg.click('[data-act=new]'); pg.fill('#wz-name', GRUPO[l]); pg.click('#wz-next'); pg.click('#wz-next')
+        pg.fill('#wz-org', ns[0]); pg.click('#wz-next'); pg.click('[data-act=unlock]'); shot(5)
         ctx.close()
         for i, (t1, t2) in enumerate(TITULOS[l], 1):
             marco(f'/tmp/cap_{l}_{i}.png', t1, t2, f'{SALIDA}/{l}-{i}.png')
