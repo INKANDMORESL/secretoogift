@@ -1,0 +1,9 @@
+# Lo que NO se sube a Expo al compilar. (Si existe este archivo, Expo no mira .gitignore.)
+# src/web.ts se genera justo antes de compilar y SÍ tiene que subirse.
+node_modules/
+.expo/
+dist/
+ios/
+android/
+*.log
+.env

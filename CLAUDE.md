@@ -27,6 +27,7 @@
 ## GitHub Actions
 - `comprobar.yml` (cada push): construye web y app, `node --check`, `php -l`, `expo install --check` (si falla, `--fix` y
   guarda package.json solo) y TypeScript. En esta sesión no hay registro de npm: la comprobación real la hace GitHub.
+- `movil/.easignore`: sin él, Expo no subiría `src/web.ts` (está en .gitignore) y falla «Bundle JavaScript».
 - `ios.yml` «App iPhone» (a mano): igual que Yococino. Secrets EXPO_TOKEN, ASC_API_KEY_P8, ASC_KEY_ID, ASC_ISSUER_ID,
   APPLE_TEAM_ID; variables ASC_APP_ID (sin ella crea la app pero no la sube), REVENUECAT_IOS_KEY, ADMOB_IOS_APP_ID,
   ADMOB_IOS_INTERSTITIAL (sin AdMob: anuncios de prueba de Google). Bundle `app.secretoogift`.
