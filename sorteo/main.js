@@ -134,6 +134,7 @@ function render(){
   else if(v.name==='mine')a.innerHTML=mineView();
   else if(v.name==='paywall')a.innerHTML=paywallView();
   else if(v.name==='send')a.innerHTML=sendView();
+  else if(v.name==='nuevo')a.innerHTML=wizardView();
   bind();
 }
 
@@ -420,11 +421,91 @@ function mineView(){
     ${IS_APP?`<button class="btn line" data-act="home">${t('makeOwn')}</button>`:`<a class="btn line" href="${APPSTORE_URL}" target="_blank" rel="noopener">${t('makeOwnWeb')}</a>`}</div>`;
 }
 
+// ---------- Nuevo sorteo paso a paso ----------
+const PASOS=4;
+const vuelta=()=>view.name==='nuevo'?{name:'nuevo',paso:view.paso}:{name:'edit'};
+const sw=(k,on)=>`<button class="sw ${on?'on':''}" data-act="wztog" data-k="${k}" role="switch" aria-checked="${on}"><i></i></button>`;
+function exclusionesHTML(g){
+  if(!g.premium)return `<button class="btn line" data-act="unlock" style="margin-top:14px">${t('wzExcl')}</button>`;
+  if(g.people.length<3)return '';
+  const opts=g.people.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('');
+  return `<div class="card" style="margin-top:14px"><h3>${t('exTitle')}</h3>
+    <p class="muted small" style="margin-top:4px">${t('exSub')}</p>
+    <div class="grid2" style="margin-top:12px"><select id="ex1">${opts}</select><select id="ex2">${opts}</select></div>
+    <button class="btn ghost sm" data-act="addex" style="margin-top:10px">${t('addEx')}</button>
+    <div style="margin-top:12px">${g.exclusions.map((e,i)=>`<span class="chip">${esc(pName(g,e[0]))} ⇄ ${esc(pName(g,e[1]))}<button data-delex="${i}" aria-label="${esc(t('remove'))}">✕</button></span>`).join('')}</div></div>`;
+}
+function wizardView(){
+  const g=draft,paso=view.paso||1;
+  const cab=`<div class="wz-top">${paso>1?`<button class="back" data-act="wzback">‹</button>`:'<span style="width:40px"></span>'}
+    <div class="wz-mid"><div class="wz-t">${esc(paso>1&&g.name?g.name:t('newTitle'))}</div><div class="wz-bar"><i style="width:${paso/PASOS*100}%"></i></div></div>
+    <button class="back" data-act="home" aria-label="✕">✕</button></div>`;
+  const pista=x=>`<p class="wz-hint">ℹ️ ${x}</p>`;
+  let cuerpo='',listo=true,boton=t('next');
+  if(paso===1){
+    cuerpo=`<h1 class="wz-h">${t('wzStep1T')}</h1>
+      <input id="wz-name" class="wz-in" placeholder="${esc(t('wzPh'))}" value="${esc(g.name)}" maxlength="40" enterkeyhint="next" autocomplete="off">
+      ${pista(t('wzStep1Hint'))}`;
+    listo=!!g.name.trim();
+  }else if(paso===2){
+    cuerpo=`<h1 class="wz-h">${t('wzStep2T')}</h1>
+      <div class="wz-row"><span>💰 ${t('wzBudget')}</span>${sw('conPres',g.conPres)}</div>
+      ${g.conPres?`<div class="wz-sub"><input id="wz-budget" placeholder="${esc(t('budgetPh'))}" value="${esc(g.budget)}" maxlength="15">
+        <div class="quick">${budgetChips().map(v=>`<button class="qc ${g.budget===v?'on':''}" data-act="bud" data-v="${esc(v)}">${esc(v)}</button>`).join('')}</div></div>`:''}
+      <div class="wz-row"><span>📅 ${t('wzDate')}</span>${sw('conFecha',g.conFecha)}</div>
+      ${g.conFecha?`<div class="wz-sub"><input id="wz-date" type="date" value="${esc(g.date)}">
+        <div class="quick">${dateChips().map(v=>`<button class="qc ${g.date===v?'on':''}" data-act="dt" data-v="${v}">${esc(fmtDate(v,true))}</button>`).join('')}</div></div>`:''}`;
+  }else if(paso===3){
+    cuerpo=`<h1 class="wz-h">${t('wzStep3T')}</h1>
+      <input id="wz-org" class="wz-in" placeholder="${esc(t('wzPh'))}" value="${esc(g.organizer||'')}" maxlength="24" enterkeyhint="next" autocomplete="off">
+      <div class="wz-row"><span>🙋 ${t('wzImIn')}</span>${sw('participa',g.participa)}</div>
+      ${pista(g.participa?t('wzStep3Hint'):t('wzStep3HintNo'))}`;
+    listo=!!(g.organizer||'').trim();
+  }else{
+    const n=g.people.length;
+    cuerpo=`<h1 class="wz-h">${t('wzStep4T')}</h1>
+      <div class="card" style="margin-top:6px">
+        <div class="row" style="margin-bottom:10px"><h3 style="flex:1">${t('participants')} <span class="muted" style="font-weight:500">(${n})</span></h3></div>
+        ${g.people.map(p=>`<div class="prow">${avatar(p,34)}<span class="name">${esc(p.name)}${p.yo?` <span class="muted" style="font-weight:400">${t('you')}</span>`:''}${p.email?`<br><span class="muted small" style="font-weight:400">✉️ ${esc(p.email)}</span>`:''}</span>
+          ${p.yo?'':`<button class="btn ghost sm" data-delp="${p.id}" aria-label="${esc(t('remove'))}">✕</button>`}</div>`).join('')}
+        <div class="row" style="margin-top:12px;align-items:stretch">
+          <div style="flex:1" class="stack"><input id="pname" placeholder="${esc(t('namePh'))}" maxlength="24" enterkeyhint="next">
+          <input id="pemail" type="email" inputmode="email" autocapitalize="off" placeholder="${esc(t('emailPh'))}" maxlength="80" enterkeyhint="done"></div>
+          <button class="btn dark sm" data-act="addp">${t('add')}</button>
+        </div>
+      </div>
+      <div id="err"></div>
+      ${exclusionesHTML(g)}
+      ${pista(t('wzStep4Hint'))}`;
+    listo=n>=3;
+    boton=listo?t('wzDraw'):t('wzNeed',{n:3-n});
+  }
+  return cab+`<div class="wz-body">${cuerpo}</div>
+    <div class="sticky"><div class="inner"><button class="btn primary big" id="wz-next" data-act="${paso<PASOS?'wznext':'savedraw'}" ${listo?'':'disabled'}>${boton}</button></div></div>`;
+}
+
 // ---------- Eventos ----------
 function readDraftFields(){
+  readWizard();
   const n=document.getElementById('gname');if(!n)return;
   draft.name=n.value;draft.budget=document.getElementById('gbudget').value;draft.date=document.getElementById('gdate').value;
   const o=document.getElementById('gorg');if(o)draft.organizer=o.value.trim();
+}
+function readWizard(){
+  if(!draft)return;
+  const v=id=>{const e=document.getElementById(id);return e?e.value:null};
+  if(v('wz-name')!==null)draft.name=v('wz-name');
+  if(v('wz-budget')!==null)draft.budget=v('wz-budget');
+  if(v('wz-date')!==null)draft.date=v('wz-date');
+  if(v('wz-org')!==null)draft.organizer=v('wz-org').trim();
+}
+// El organizador como participante («Tú»), siempre el primero y con el mismo id
+function ponerOrganizador(){
+  draft.people=draft.people.filter(p=>!p.yo);
+  if(draft.participa&&(draft.organizer||'').trim()){
+    draft.yoId=draft.yoId||uid();
+    draft.people.unshift({id:draft.yoId,name:draft.organizer.trim(),yo:true});
+  }else draft.exclusions=draft.exclusions.filter(x=>!x.includes(draft.yoId));
 }
 function showErr(m){const e=document.getElementById('err');if(e)e.innerHTML=`<p class="err">${esc(m)}</p>`}
 function addPerson(){
@@ -434,7 +515,7 @@ function addPerson(){
   if(em&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){showErr(t('errEmail'));return}
   if(draft.people.some(p=>p.name.toLowerCase()===n.toLowerCase())){showErr(t('errDup'));return}
   if(!draft.premium&&draft.people.length>=FREE_MAX){
-    openPaywall({target:'draft',back:{name:'edit'},after:()=>{draft.people.push({id:uid(),name:n,email:em});go({name:'edit'})}});return}
+    const vv=vuelta();openPaywall({target:'draft',back:vv,after:()=>{draft.people.push({id:uid(),name:n,email:em});go(vv)}});return}
   draft.people.push({id:uid(),name:n,email:em});render();setTimeout(()=>document.getElementById('pname').focus(),0);
 }
 async function sendMails(g,list){
@@ -461,7 +542,17 @@ function bind(){
     if(el.dataset.delp){readDraftFields();const id=el.dataset.delp;draft.people=draft.people.filter(p=>p.id!==id);draft.exclusions=draft.exclusions.filter(x=>!x.includes(id));render();return}
     if(el.dataset.delex){readDraftFields();draft.exclusions.splice(+el.dataset.delex,1);render();return}
     switch(act){
-      case 'new':draft={_new:true,id:rnd(),name:'',budget:'',date:'',people:[],exclusions:[],assignments:null,seen:{}};go({name:'edit'});break;
+      case 'new':draft={_new:true,id:rnd(),name:'',budget:'',date:'',people:[],exclusions:[],assignments:null,seen:{},participa:true,organizer:''};go({name:'nuevo',paso:1});break;
+      case 'wznext':{readWizard();
+        if(view.paso===1&&!draft.name.trim())return;
+        if(view.paso===2){if(!draft.conPres)draft.budget='';if(!draft.conFecha)draft.date=''}
+        if(view.paso===3){if(!(draft.organizer||'').trim())return;ponerOrganizador()}
+        go({name:'nuevo',paso:view.paso+1});setTimeout(()=>{const f=document.querySelector('.wz-in');if(f)f.focus()},50);break}
+      case 'wzback':readWizard();go({name:'nuevo',paso:Math.max(1,view.paso-1)});break;
+      case 'wztog':readWizard();draft[el.dataset.k]=!draft[el.dataset.k];
+        if(el.dataset.k==='conPres'&&draft.conPres&&!draft.budget)draft.budget=budgetChips()[1];
+        if(el.dataset.k==='conFecha'&&draft.conFecha&&!draft.date)draft.date=dateChips()[0];
+        render();break;
       case 'home':go({name:'home'});break;
       case 'back':if(draft&&!draft._new)go({name:'group',id:draft.id,tab:'pass'});else go({name:'home'});break;
       case 'addp':addPerson();break;
@@ -469,20 +560,22 @@ function bind(){
         if(x===y){showErr(t('errSame'));return}
         if(draft.exclusions.some(e=>e.includes(x)&&e.includes(y))){showErr(t('errExists'));return}
         draft.exclusions.push([x,y]);render();break}
-      case 'savedraw':{readDraftFields();
+      case 'savedraw':{readDraftFields();const vv=vuelta();
+        if(!draft.premium)draft.organizer=draft.organizer||'';
+        delete draft.conPres;delete draft.conFecha;
         if(!draft.name.trim()){showErr(t('errName'));return}
         if(draft.people.length<3){showErr(t('errMin3'));return}
         const finish=()=>{
           const g=JSON.parse(JSON.stringify(draft));const isNew=g._new;delete g._new;
-          if(!doDraw(g)){go({name:'edit'});setTimeout(()=>showErr(t('errImpossible')),0);return}
+          if(!doDraw(g)){go(vv);setTimeout(()=>showErr(t('errImpossible')),0);return}
           if(isNew)state.groups.unshift(g);else{const i=state.groups.findIndex(x=>x.id===g.id);state.groups[i]=g}
           save();syncGroup(g);draft=null;toast(t('toastDone'));go({name:'group',id:g.id});
         };
-        if(draft._new&&!draft.premium)openPaywall({target:'draft',back:{name:'edit'},after:finish,allowFree:true,onFree:finish});
+        if(draft._new&&!draft.premium)openPaywall({target:'draft',back:vv,after:finish,allowFree:true,onFree:finish});
         else finish();
         break}
       case 'upgrade':{const id=view.id,tab=view.tab;openPaywall({target:id,back:{name:'group',id,tab},after:()=>go({name:'group',id,tab})});break}
-      case 'unlock':readDraftFields();openPaywall({target:'draft',back:{name:'edit'},after:()=>go({name:'edit'})});break;
+      case 'unlock':{readDraftFields();const vv=vuelta();openPaywall({target:'draft',back:vv,after:()=>go(vv)});break}
       case 'pwback':go(view.back);break;
       case 'pwfree':view.onFree();break;
       case 'pwbuy':{const v=view;buyPremium(()=>{
@@ -521,6 +614,11 @@ function bind(){
       case 'dt':readDraftFields();draft.date=el.dataset.v;render();break;
     }
   };
+  ['wz-name','wz-org'].forEach(id=>{const f=document.getElementById(id);if(!f)return;
+    const b=document.getElementById('wz-next');
+    f.oninput=()=>{if(b)b.disabled=!f.value.trim()};
+    f.onkeydown=e=>{if(e.key==='Enter'&&f.value.trim()){e.preventDefault();b&&b.click()}};
+  });
   const pi=document.getElementById('pname');
   if(pi)pi.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();document.getElementById('pemail').focus()}};
   const pe=document.getElementById('pemail');

@@ -306,3 +306,30 @@ passSteps:'<ol><li>Gib das Handy der ersten Person.</li><li>Tippe auf ihren Name
 sendBtn:'Senden',sentMark:'Gesendet',more:'Mehr Optionen',saveBtn:'Speichern',noEmailsYet:'Noch niemand hat eine E-Mail. Füge sie unten hinzu.',
 mailHello:'Hallo {name}!',mailIntro:'Die Wichtel-Auslosung {group} ist fertig. Dein Ergebnis wartet auf dich.',mailDate:'Übergabe: {d}',mailBtn:'Sehen, wen ich beschenke',mailSecret:'🤫 Geheim: Zeig es niemandem.',mailFooter:'Du bekommst diese E-Mail, weil dich jemand zu einer Wichtel-Auslosung bei Secretoogift hinzugefügt hat.'}};
 for(const l in I18N_ENVIO)Object.assign(I18N[l],I18N_ENVIO[l]);
+// Nuevo sorteo paso a paso
+const I18N_WZ={
+es:{next:'Siguiente →',wzPh:'Escribe aquí',wzStep1T:'Para empezar, ponle un nombre a tu grupo',wzStep1Hint:'Lo verán todos los participantes, así que puedes poner algo gracioso 😜',
+wzStep2T:'Ahora, configúralo como quieras',wzBudget:'Añadir presupuesto',wzDate:'Añadir fecha de entrega',
+wzStep3T:'¿Cómo te llamas?',wzImIn:'Yo también participo',wzStep3Hint:'Participarás con este nombre: no hace falta que te vuelvas a añadir.',wzStep3HintNo:'Solo organizas: no entrarás en el sorteo.',
+wzStep4T:'¿Quién más participa?',wzStep4Hint:'Añade a todos antes de sortear. El email es opcional: sirve para enviarles su resultado por correo.',you:'(Tú)',wzDraw:'🎲 Hacer el sorteo',wzNeed:'Faltan {n} participantes',wzExcl:'🔒 Añadir exclusiones (premium)'},
+en:{next:'Next →',wzPh:'Type here',wzStep1T:'First, give your group a name',wzStep1Hint:'Everyone will see it, so feel free to make it funny 😜',
+wzStep2T:'Now set it up your way',wzBudget:'Add a budget',wzDate:'Add an exchange date',
+wzStep3T:'What’s your name?',wzImIn:'I’m taking part too',wzStep3Hint:'You’ll take part with this name: no need to add yourself again.',wzStep3HintNo:'You’re only organising: you won’t be in the draw.',
+wzStep4T:'Who else is taking part?',wzStep4Hint:'Add everyone before the draw. Email is optional: it’s for sending them their result.',you:'(You)',wzDraw:'🎲 Run the draw',wzNeed:'{n} more participants needed',wzExcl:'🔒 Add exclusions (premium)'},
+pt:{next:'Seguinte →',wzPh:'Escreve aqui',wzStep1T:'Para começar, dá um nome ao teu grupo',wzStep1Hint:'Todos os participantes o vão ver, por isso podes pôr algo divertido 😜',
+wzStep2T:'Agora, configura-o como quiseres',wzBudget:'Adicionar orçamento',wzDate:'Adicionar data da troca',
+wzStep3T:'Como te chamas?',wzImIn:'Eu também participo',wzStep3Hint:'Vais participar com este nome: não precisas de te adicionar outra vez.',wzStep3HintNo:'Só organizas: não entras no sorteio.',
+wzStep4T:'Quem mais participa?',wzStep4Hint:'Adiciona todos antes de sortear. O email é opcional: serve para enviar o resultado por email.',you:'(Tu)',wzDraw:'🎲 Fazer o sorteio',wzNeed:'Faltam {n} participantes',wzExcl:'🔒 Adicionar exclusões (premium)'},
+fr:{next:'Suivant →',wzPh:'Écrivez ici',wzStep1T:'Pour commencer, donnez un nom à votre groupe',wzStep1Hint:'Tous les participants le verront, alors mettez quelque chose de drôle 😜',
+wzStep2T:'Maintenant, configurez-le comme vous voulez',wzBudget:'Ajouter un budget',wzDate:'Ajouter une date d’échange',
+wzStep3T:'Comment vous appelez-vous ?',wzImIn:'Je participe aussi',wzStep3Hint:'Vous participerez avec ce nom : inutile de vous ajouter à nouveau.',wzStep3HintNo:'Vous organisez seulement : vous ne serez pas dans le tirage.',
+wzStep4T:'Qui d’autre participe ?',wzStep4Hint:'Ajoutez tout le monde avant le tirage. L’e-mail est facultatif : il sert à envoyer le résultat.',you:'(Vous)',wzDraw:'🎲 Lancer le tirage',wzNeed:'Il manque {n} participants',wzExcl:'🔒 Ajouter des exclusions (premium)'},
+it:{next:'Avanti →',wzPh:'Scrivi qui',wzStep1T:'Per iniziare, dai un nome al tuo gruppo',wzStep1Hint:'Lo vedranno tutti i partecipanti, quindi puoi mettere qualcosa di divertente 😜',
+wzStep2T:'Ora configuralo come vuoi',wzBudget:'Aggiungi budget',wzDate:'Aggiungi data dello scambio',
+wzStep3T:'Come ti chiami?',wzImIn:'Partecipo anch’io',wzStep3Hint:'Parteciperai con questo nome: non serve aggiungerti di nuovo.',wzStep3HintNo:'Organizzi soltanto: non sarai nell’estrazione.',
+wzStep4T:'Chi altro partecipa?',wzStep4Hint:'Aggiungi tutti prima dell’estrazione. L’email è facoltativa: serve per inviare il risultato.',you:'(Tu)',wzDraw:'🎲 Fai l’estrazione',wzNeed:'Mancano {n} partecipanti',wzExcl:'🔒 Aggiungi esclusioni (premium)'},
+de:{next:'Weiter →',wzPh:'Hier schreiben',wzStep1T:'Gib deiner Gruppe zuerst einen Namen',wzStep1Hint:'Alle Teilnehmer sehen ihn – also gern etwas Lustiges 😜',
+wzStep2T:'Jetzt nach deinen Wünschen einstellen',wzBudget:'Budget hinzufügen',wzDate:'Übergabedatum hinzufügen',
+wzStep3T:'Wie heißt du?',wzImIn:'Ich mache auch mit',wzStep3Hint:'Du machst mit diesem Namen mit: Du musst dich nicht noch einmal hinzufügen.',wzStep3HintNo:'Du organisierst nur: Du bist nicht in der Auslosung.',
+wzStep4T:'Wer macht noch mit?',wzStep4Hint:'Füge vor dem Auslosen alle hinzu. Die E-Mail ist optional: damit schickst du ihnen ihr Ergebnis.',you:'(Du)',wzDraw:'🎲 Auslosen',wzNeed:'Es fehlen {n} Teilnehmer',wzExcl:'🔒 Ausschlüsse hinzufügen (Premium)'}};
+for(const l in I18N_WZ)Object.assign(I18N[l],I18N_WZ[l]);
