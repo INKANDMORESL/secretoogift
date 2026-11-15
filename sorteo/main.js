@@ -10,6 +10,10 @@ function nativo(tipo,datos){return new Promise(res=>{const id=++_nid;_pend[id]=r
 if(IS_APP)document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href]');if(!a)return;
   const h=a.getAttribute('href');if(/^(https?:|mailto:|tel:)/i.test(h)){e.preventDefault();nativo('abrir',{url:a.href})}},true);
 
+// En el navegador (tu web), la página solo sirve para ver resultados: nada de crear sorteos
+const enWebPropia=!IS_APP&&/^https?:$/.test(location.protocol)&&!/claude|anthropic|claudeusercontent|127\.0\.0\.1|localhost/.test(location.hostname);
+const soloResultados=!IS_APP&&/^https?:$/.test(location.protocol)&&!/claude|anthropic|claudeusercontent/.test(location.hostname);
+
 // ---------- Estado y almacenamiento ----------
 const KEY='amigo-invisible-v1';
 let state={groups:[]};
@@ -125,6 +129,8 @@ const giftHTML=()=>`<img class="gift" src="${LOGO}" alt="">`;
 // ---------- Vistas ----------
 function render(){
   const a=document.getElementById('app');
+  // Fuera de la app, cualquier pantalla que no sea un resultado lleva a la portada (para descargar la app)
+  if(soloResultados&&view.name!=='mine'){if(enWebPropia){location.replace(location.origin+'/');return}}
   const v=view;
   if(v.name==='home')a.innerHTML=homeView();
   else if(v.name==='edit')a.innerHTML=editView();
@@ -414,7 +420,7 @@ function mineView(){
   if(stage==='gift')return `<div class="reveal"><p class="muted">${esc(d.g)}</p><h1>${esc(t('hello',{name:d.f}))}</h1>${giftHTML()}<p class="muted">${t('tapOpen')}</p></div>`;
   if(stage==='ad')return adView();
   if(d.i&&d.o&&!view.pinged){view.pinged=true;api('open',{d:d.i,t:d.o}).catch(()=>{})}
-  return `<div class="top"><button class="back" data-act="home">‹</button></div><div class="reveal">
+  return `${IS_APP?`<div class="top"><button class="back" data-act="home">‹</button></div>`:''}<div class="reveal">
     <div class="result"><div class="meta">${esc(t('youGive',{name:d.f}))}</div><div class="to">${esc(d.t)}</div>
     <div class="meta">${metaLine(d.b,d.d)}</div></div>
     <p class="muted small">${t('secret')}</p>
@@ -632,7 +638,6 @@ function bind(){
 (function init(){
   document.documentElement.lang=LANG;document.title=t('appName');
   const h=(location.hash||'').slice(1);
-  const enWebPropia=!IS_APP&&/^https?:$/.test(location.protocol)&&!/claude|anthropic|claudeusercontent|127\.0\.0\.1|localhost/.test(location.hostname);
   if(!abrirEnlace(h)){
     // Sin enlace de resultado: en tu web, a la portada para descargar la app (los sorteos solo se hacen en la app)
     if(enWebPropia){location.replace(location.origin+'/');return}
