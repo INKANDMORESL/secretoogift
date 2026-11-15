@@ -11,7 +11,7 @@
 - `sorteo/`: LA app (una sola página HTML+JS). `plantilla.html` (estilos), `i18n.js` (todos los textos, 6 idiomas),
   `main.js` (lógica), `logo.b64`. `herramientas/construir.mjs` la monta:
   - `web` → `publicar/` = `web/` + `sorteo/index.html` + `sorteo/api.php` (para IONOS).
-  - `app` → `movil/src/web.ts` (la misma página como texto, con las fuentes dentro). No se guarda en git.
+  - `app` → `movil/src/web.ts` (la misma página como texto, con las fuentes dentro). Se guarda en git (ver abajo).
   Datos que se ponen al construir (variables de GitHub): DOMINIO (por defecto secretoogift.com), EMAIL_SOPORTE,
   EMAIL_REMITENTE, APPSTORE_ID. En los archivos van como `__DOMINIO__`, `__EMAIL_SOPORTE__`…
 - `movil/`: app Expo (SDK 58) = WebView con `src/web.ts` y `baseUrl` https://DOMINIO/sorteo/ (así `api.php` y los enlaces
@@ -27,7 +27,7 @@
 ## GitHub Actions
 - `comprobar.yml` (cada push): construye web y app, `node --check`, `php -l`, `expo install --check` (si falla, `--fix` y
   guarda package.json solo) y TypeScript. En esta sesión no hay registro de npm: la comprobación real la hace GitHub.
-- `movil/.easignore`: sin él, Expo no subiría `src/web.ts` (está en .gitignore) y falla «Bundle JavaScript».
+- `movil/src/web.ts` SE GUARDA en git (generado): Expo compila con los archivos que ve git; si se ignora, falla «Bundle JavaScript». Los flujos lo regeneran antes de compilar.
 - `ios.yml` «App iPhone» (a mano): igual que Yococino. Secrets EXPO_TOKEN, ASC_API_KEY_P8, ASC_KEY_ID, ASC_ISSUER_ID,
   APPLE_TEAM_ID; variables ASC_APP_ID (sin ella crea la app pero no la sube), REVENUECAT_IOS_KEY, ADMOB_IOS_APP_ID,
   ADMOB_IOS_INTERSTITIAL (sin AdMob: anuncios de prueba de Google). Bundle `app.secretoogift`.
