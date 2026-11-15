@@ -19,7 +19,9 @@
   Tipos: `anuncio` (AdMob intersticial, `src/anuncios.ts`, solo no personalizados + aviso de consentimiento UE),
   `comprar` (RevenueCat, `src/pagos.ts`), `copiar`, `compartir`, `abrir` (enlaces de fuera), `atras` (Android).
   En la web, `IS_APP` = `window.IS_NATIVE_APP`. Enlaces de resultado: `secretoogift://r#código` o https://DOMINIO/sorteo/#código.
-- `servidor/api.php`: PHP sin base de datos (JSON en `sorteo/data/`, se borra a los 120 días). Acciones: register, open,
+- Enlaces cortos: https://DOMINIO/s/Ab3xK9 (`web/.htaccess` redirige a /sorteo/#Ab3xK9; `api.php?a=get` da el código largo cifrado).
+  En el navegador solo se ven resultados de sorteos PREMIUM; los gratis piden descargar la app (y allí, anuncio). Sin enlace, /sorteo/ redirige a la portada: los sorteos solo se crean en la app.
+- `servidor/api.php`: PHP sin base de datos (JSON en `sorteo/data/`, se borra a los 120 días). Acciones: register (devuelve `cortos`), get, open,
   status, mail (solo a emails guardados, límite por sorteo). Remitente FROM_EMAIL = EMAIL_REMITENTE.
 - `web/`: portada para descargar la app (6 idiomas, capturas en `web/img/{idioma}_{home,gift,group}.webp`) y `legal.html`.
 - `tienda/`: capturas App Store 1320×2868 (`capturas.py`) y `textos-app-store.txt`.

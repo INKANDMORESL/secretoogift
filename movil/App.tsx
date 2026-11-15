@@ -21,13 +21,13 @@ const WebView = WebViewOriginal as unknown as ComponentType<any>;
 
 const BASE = `https://${DOMINIO}/sorteo/`;
 
-// Saca el código del resultado de un enlace: https://dominio/sorteo/#abc… o secretoogift://r#abc…
+// Saca el código del resultado: https://dominio/sorteo/#Ab3xK9 (corto) o #abc… (largo), o secretoogift://r#…
 function codigoDe(url: string | null | undefined): string | null {
   if (!url) return null;
   const i = url.indexOf('#');
   if (i < 0) return null;
   const c = url.slice(i + 1);
-  return /^[0-9a-f]{6,}$/i.test(c) ? c : null;
+  return /^[0-9A-Za-z]{4,}$/.test(c) ? c : null;
 }
 
 type Mensaje = { id?: number; tipo?: string; datos?: Record<string, unknown> };

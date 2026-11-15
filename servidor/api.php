@@ -32,6 +32,12 @@ function path($d) { global $DIR; return "$DIR/d_" . $d . '.json'; }
 function load($d) { $f = path($d); if (!$d || !is_file($f)) return null; return json_decode(file_get_contents($f), true); }
 function store($d, $data) { file_put_contents(path($d), json_encode($data, JSON_UNESCAPED_UNICODE), LOCK_EX); }
 function check_key($draw, $k) { return $draw && hash_equals($draw['k'], hash('sha256', (string)$k)); }
+// Enlaces cortos: s_<código>.json apunta a un sorteo y a una persona
+function corto_nuevo() {
+  global $DIR; $abc = 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  do { $c = ''; for ($i = 0; $i < 7; $i++) $c .= $abc[random_int(0, strlen($abc) - 1)]; } while (is_file("$DIR/s_$c.json"));
+  return $c;
+}
 
 function rate_limit($what, $max) {
   global $DIR;
@@ -64,12 +70,17 @@ switch ($a) {
     $old = load($d);
     if ($old && !check_key($old, $k)) fail('forbidden', 403);
     if (!$old) rate_limit('register', MAX_REGISTER_HOUR);
-    $list = [];
+    $list = []; $cortos = [];
     foreach ($people as $p) {
       $t = cid($p['t'] ?? ''); if (strlen($t) < 8) fail('bad');
       $e = trim((string)($p['e'] ?? ''));
       if ($e !== '' && !filter_var($e, FILTER_VALIDATE_EMAIL)) $e = '';
-      $list[$t] = ['n' => mb_substr((string)($p['n'] ?? ''), 0, 40), 'e' => $e];
+      $c = preg_replace('/[^0-9a-f]/i', '', substr((string)($p['c'] ?? ''), 0, 4000));
+      // El mismo código corto de siempre para cada persona (si se repite el sorteo, el enlace sigue siendo el mismo)
+      $s = $old['people'][$t]['s'] ?? '';
+      if ($c !== '' && $s === '') $s = corto_nuevo();
+      if ($s !== '') { file_put_contents("$DIR/s_$s.json", json_encode(['d' => $d, 't' => $t]), LOCK_EX); $cortos[$t] = $s; }
+      $list[$t] = ['n' => mb_substr((string)($p['n'] ?? ''), 0, 40), 'e' => $e, 'c' => $c, 's' => $s];
     }
     store($d, [
       'k' => hash('sha256', $k),
@@ -78,7 +89,19 @@ switch ($a) {
       'mails' => $old['mails'] ?? 0,
       'created' => $old['created'] ?? time(),
     ]);
-    out(['ok' => 1]);
+    out(['ok' => 1, 'cortos' => (object)$cortos]);
+  }
+
+  // Enlace corto → el resultado (cifrado) de esa persona
+  case 'get': {
+    $s = preg_replace('/[^A-Za-z0-9]/', '', substr((string)($_GET['s'] ?? ''), 0, 16));
+    $f = "$DIR/s_$s.json";
+    if (!$s || !is_file($f)) fail('notfound', 404);
+    $r = json_decode(file_get_contents($f), true);
+    $draw = load(cid($r['d'] ?? ''));
+    $c = $draw['people'][$r['t'] ?? '']['c'] ?? '';
+    if (!$c) fail('notfound', 404);
+    out(['c' => $c]);
   }
 
   // Lo llama el enlace de cada participante al ver su resultado

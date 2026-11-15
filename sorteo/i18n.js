@@ -18,7 +18,7 @@ premCard:'👑 Sorteo premium',organizes:'Organiza:',help:'¿Necesitas ayuda? Es
 redraw:'🔄 Repetir sorteo',spoiler:'👀 Ver todos los resultados',
 onlyLook:'Solo debe mirar',tapGift:'Toca el regalo para descubrir a quién le regalas',youGive:'{name}, te ha tocado regalar a',budgetLbl:'Presupuesto: {b}',memorize:'Memorízalo y ocúltalo antes de pasar el móvil.',hide:'🙈 Ocultar y pasar el móvil',
 codeOf:'Código de {name}',codeWarn:'Este código solo revela el resultado de {name}. No lo abras tú si también participas.',copyMsg:'Copiar mensaje para enviar',copyCode:'Copiar solo el código',
-msg:'🎁 ¡Hola {name}! Ya está hecho el sorteo de «{group}».{extra}{org}\n\nAbre la app {app}, toca «Tengo un código» y pega este código para ver a quién le regalas (no se lo enseñes a nadie 🤫):\n\n{code}',
+msg:'🎁 ¡Hola {name}! Ya está hecho el sorteo de {group}.{extra}{org}\n\nAbre la app {app}, toca «Tengo un código» y pega este código para ver a quién le regalas (no se lo enseñes a nadie 🤫):\n\n{code}',
 msgBudget:' Presupuesto: {b}.',msgDate:' Entrega: {d}.',msgOrg:'\n👑 Organiza: {o}',
 pasteTitle:'Tengo un código',pasteSub:'Pega aquí el código que te ha enviado el organizador.',pastePh:'Pega tu código…',discover:'Descubrir',
 hello:'Hola, {name}',tapOpen:'Toca el regalo para abrirlo',secret:'🤫 Que no se entere nadie.',
@@ -30,7 +30,7 @@ mRedrawT:'¿Repetir el sorteo?',mRedrawX:'Se asignará todo de nuevo. Si alguien
 mSpoilT:'¿Ver todos los resultados?',mSpoilX:'Si participas tú también, te vas a destripar la sorpresa.',mSpoilOk:'Ver igualmente',results:'Resultados',close:'Cerrar',ok:'Aceptar',cancel:'Cancelar',
 payT:'Pago de {price}',payX:'Modo demostración: aquí irá el pago real (Apple en la app, Stripe en la web). ¿Simular el pago?',payOk:'Simular pago',
 pwTitle:'Sorteo premium',buyBtn:'Crear sorteo premium',noThanks:'No quiero estas ventajas',oneTime:'Pago único por sorteo.',
-feats:['<b>Exclusiones</b> entre participantes 👀','<b>Participantes ilimitados</b> (gratis hasta {max}) 👨‍👩‍👧‍👦','Completamente <b>sin anuncios</b> 🙈','<b>Edición total</b> para evitar errores ✏️','<b>Ayuda personalizada</b> 🙋','Destaca tu <b>nombre</b> 😎','Apoya a los <b>desarrolladores</b> ❤️'],
+feats:['<b>Exclusiones</b> entre participantes 👀','<b>Participantes ilimitados</b> (gratis hasta {max}) ♾️','Completamente <b>sin anuncios</b> 🙈','<b>Edición total</b> para evitar errores ✏️','<b>Ayuda personalizada</b> 🙋','Destaca tu <b>nombre</b> 😎','Apoya a los <b>desarrolladores</b> ❤️'],
 adT:'Espacio publicitario',adX:'Hazte premium por {price} y quita los anuncios',language:'Idioma'},
 
 en:{_name:'English',_flag:'🇬🇧',_loc:'en-GB',
@@ -51,7 +51,7 @@ premCard:'👑 Premium draw',organizes:'Organised by:',help:'Need help? Write to
 redraw:'🔄 Redo draw',spoiler:'👀 See all results',
 onlyLook:'Only this person should look',tapGift:'Tap the gift to find out who you’re buying for',youGive:'{name}, you’re buying a gift for',budgetLbl:'Budget: {b}',memorize:'Remember it and hide it before passing the phone.',hide:'🙈 Hide and pass the phone',
 codeOf:'{name}’s code',codeWarn:'This code only reveals {name}’s result. Don’t open it yourself if you’re taking part.',copyMsg:'Copy message to send',copyCode:'Copy code only',
-msg:'🎁 Hi {name}! The “{group}” Secret Santa draw is done.{extra}{org}\n\nOpen the {app} app, tap “I have a code” and paste this code to see who you’re buying for (don’t show anyone 🤫):\n\n{code}',
+msg:'🎁 Hi {name}! The {group} Secret Santa draw is done.{extra}{org}\n\nOpen the {app} app, tap “I have a code” and paste this code to see who you’re buying for (don’t show anyone 🤫):\n\n{code}',
 msgBudget:' Budget: {b}.',msgDate:' Exchange: {d}.',msgOrg:'\n👑 Organised by: {o}',
 pasteTitle:'I have a code',pasteSub:'Paste the code the organiser sent you.',pastePh:'Paste your code…',discover:'Reveal',
 hello:'Hi, {name}',tapOpen:'Tap the gift to open it',secret:'🤫 Don’t tell anyone.',
@@ -63,7 +63,7 @@ mRedrawT:'Redo the draw?',mRedrawX:'Everything will be reassigned. Results alrea
 mSpoilT:'See all results?',mSpoilX:'If you’re taking part too, this will spoil the surprise.',mSpoilOk:'Show anyway',results:'Results',close:'Close',ok:'OK',cancel:'Cancel',
 payT:'Pay {price}',payX:'Demo mode: real payment goes here (Apple in the app, Stripe on the web). Simulate payment?',payOk:'Simulate payment',
 pwTitle:'Premium draw',buyBtn:'Create premium draw',noThanks:'No thanks',oneTime:'One-off payment per draw.',
-feats:['<b>Exclusions</b> between participants 👀','<b>Unlimited participants</b> (free up to {max}) 👨‍👩‍👧‍👦','Completely <b>ad-free</b> 🙈','<b>Full editing</b> to avoid mistakes ✏️','<b>Personal support</b> 🙋','Highlight your <b>name</b> 😎','Support the <b>developers</b> ❤️'],
+feats:['<b>Exclusions</b> between participants 👀','<b>Unlimited participants</b> (free up to {max}) ♾️','Completely <b>ad-free</b> 🙈','<b>Full editing</b> to avoid mistakes ✏️','<b>Personal support</b> 🙋','Highlight your <b>name</b> 😎','Support the <b>developers</b> ❤️'],
 adT:'Advertisement',adX:'Go premium for {price} and remove ads',language:'Language'},
 
 pt:{_name:'Português',_flag:'🇵🇹',_loc:'pt-PT',
@@ -84,7 +84,7 @@ premCard:'👑 Sorteio premium',organizes:'Organiza:',help:'Precisas de ajuda? E
 redraw:'🔄 Repetir sorteio',spoiler:'👀 Ver todos os resultados',
 onlyLook:'Só deve ver',tapGift:'Toca no presente para descobrir a quem ofereces',youGive:'{name}, calhou-te oferecer a',budgetLbl:'Orçamento: {b}',memorize:'Memoriza e esconde antes de passar o telemóvel.',hide:'🙈 Esconder e passar o telemóvel',
 codeOf:'Código de {name}',codeWarn:'Este código só revela o resultado de {name}. Não o abras se também participas.',copyMsg:'Copiar mensagem para enviar',copyCode:'Copiar só o código',
-msg:'🎁 Olá {name}! O sorteio de «{group}» já está feito.{extra}{org}\n\nAbre a app {app}, toca em «Tenho um código» e cola este código para ver a quem ofereces (não mostres a ninguém 🤫):\n\n{code}',
+msg:'🎁 Olá {name}! O sorteio de {group} já está feito.{extra}{org}\n\nAbre a app {app}, toca em «Tenho um código» e cola este código para ver a quem ofereces (não mostres a ninguém 🤫):\n\n{code}',
 msgBudget:' Orçamento: {b}.',msgDate:' Troca: {d}.',msgOrg:'\n👑 Organiza: {o}',
 pasteTitle:'Tenho um código',pasteSub:'Cola aqui o código que o organizador te enviou.',pastePh:'Cola o teu código…',discover:'Descobrir',
 hello:'Olá, {name}',tapOpen:'Toca no presente para o abrir',secret:'🤫 Não contes a ninguém.',
@@ -96,7 +96,7 @@ mRedrawT:'Repetir o sorteio?',mRedrawX:'Tudo será atribuído de novo. Resultado
 mSpoilT:'Ver todos os resultados?',mSpoilX:'Se também participas, vais estragar a surpresa.',mSpoilOk:'Ver mesmo assim',results:'Resultados',close:'Fechar',ok:'OK',cancel:'Cancelar',
 payT:'Pagamento de {price}',payX:'Modo demonstração: aqui irá o pagamento real (Apple na app, Stripe na web). Simular o pagamento?',payOk:'Simular pagamento',
 pwTitle:'Sorteio premium',buyBtn:'Criar sorteio premium',noThanks:'Não quero estas vantagens',oneTime:'Pagamento único por sorteio.',
-feats:['<b>Exclusões</b> entre participantes 👀','<b>Participantes ilimitados</b> (grátis até {max}) 👨‍👩‍👧‍👦','Totalmente <b>sem anúncios</b> 🙈','<b>Edição total</b> para evitar erros ✏️','<b>Ajuda personalizada</b> 🙋','Destaca o teu <b>nome</b> 😎','Apoia os <b>programadores</b> ❤️'],
+feats:['<b>Exclusões</b> entre participantes 👀','<b>Participantes ilimitados</b> (grátis até {max}) ♾️','Totalmente <b>sem anúncios</b> 🙈','<b>Edição total</b> para evitar erros ✏️','<b>Ajuda personalizada</b> 🙋','Destaca o teu <b>nome</b> 😎','Apoia os <b>programadores</b> ❤️'],
 adT:'Espaço publicitário',adX:'Torna-te premium por {price} e remove os anúncios',language:'Idioma'},
 
 fr:{_name:'Français',_flag:'🇫🇷',_loc:'fr-FR',
@@ -117,7 +117,7 @@ premCard:'👑 Tirage premium',organizes:'Organisé par :',help:'Besoin d’aide
 redraw:'🔄 Refaire le tirage',spoiler:'👀 Voir tous les résultats',
 onlyLook:'Seul(e) doit regarder',tapGift:'Touchez le cadeau pour découvrir à qui vous offrez',youGive:'{name}, tu offres un cadeau à',budgetLbl:'Budget : {b}',memorize:'Retenez-le et cachez-le avant de passer le téléphone.',hide:'🙈 Cacher et passer le téléphone',
 codeOf:'Code de {name}',codeWarn:'Ce code ne révèle que le résultat de {name}. Ne l’ouvrez pas si vous participez aussi.',copyMsg:'Copier le message à envoyer',copyCode:'Copier le code seulement',
-msg:'🎁 Salut {name} ! Le tirage « {group} » est fait.{extra}{org}\n\nOuvre l’app {app}, touche « J’ai un code » et colle ce code pour voir à qui tu offres (ne le montre à personne 🤫) :\n\n{code}',
+msg:'🎁 Salut {name} ! Le tirage {group} est fait.{extra}{org}\n\nOuvre l’app {app}, touche « J’ai un code » et colle ce code pour voir à qui tu offres (ne le montre à personne 🤫) :\n\n{code}',
 msgBudget:' Budget : {b}.',msgDate:' Échange : {d}.',msgOrg:'\n👑 Organisé par : {o}',
 pasteTitle:'J’ai un code',pasteSub:'Collez ici le code envoyé par l’organisateur.',pastePh:'Collez votre code…',discover:'Découvrir',
 hello:'Salut, {name}',tapOpen:'Touchez le cadeau pour l’ouvrir',secret:'🤫 Ne le dis à personne.',
@@ -129,7 +129,7 @@ mRedrawT:'Refaire le tirage ?',mRedrawX:'Tout sera réattribué. Les résultats 
 mSpoilT:'Voir tous les résultats ?',mSpoilX:'Si vous participez aussi, la surprise sera gâchée.',mSpoilOk:'Voir quand même',results:'Résultats',close:'Fermer',ok:'OK',cancel:'Annuler',
 payT:'Paiement de {price}',payX:'Mode démo : le vrai paiement ira ici (Apple dans l’app, Stripe sur le web). Simuler le paiement ?',payOk:'Simuler le paiement',
 pwTitle:'Tirage premium',buyBtn:'Créer un tirage premium',noThanks:'Je ne veux pas ces avantages',oneTime:'Paiement unique par tirage.',
-feats:['<b>Exclusions</b> entre participants 👀','<b>Participants illimités</b> (gratuit jusqu’à {max}) 👨‍👩‍👧‍👦','Totalement <b>sans publicité</b> 🙈','<b>Modification totale</b> pour éviter les erreurs ✏️','<b>Aide personnalisée</b> 🙋','Mettez votre <b>nom</b> en avant 😎','Soutenez les <b>développeurs</b> ❤️'],
+feats:['<b>Exclusions</b> entre participants 👀','<b>Participants illimités</b> (gratuit jusqu’à {max}) ♾️','Totalement <b>sans publicité</b> 🙈','<b>Modification totale</b> pour éviter les erreurs ✏️','<b>Aide personnalisée</b> 🙋','Mettez votre <b>nom</b> en avant 😎','Soutenez les <b>développeurs</b> ❤️'],
 adT:'Espace publicitaire',adX:'Passez en premium pour {price} et supprimez la pub',language:'Langue'},
 
 it:{_name:'Italiano',_flag:'🇮🇹',_loc:'it-IT',
@@ -150,7 +150,7 @@ premCard:'👑 Estrazione premium',organizes:'Organizza:',help:'Serve aiuto? Scr
 redraw:'🔄 Ripeti estrazione',spoiler:'👀 Vedi tutti i risultati',
 onlyLook:'Deve guardare solo',tapGift:'Tocca il regalo per scoprire a chi regali',youGive:'{name}, devi fare il regalo a',budgetLbl:'Budget: {b}',memorize:'Memorizzalo e nascondilo prima di passare il telefono.',hide:'🙈 Nascondi e passa il telefono',
 codeOf:'Codice di {name}',codeWarn:'Questo codice rivela solo il risultato di {name}. Non aprirlo se partecipi anche tu.',copyMsg:'Copia messaggio da inviare',copyCode:'Copia solo il codice',
-msg:'🎁 Ciao {name}! L’estrazione «{group}» è fatta.{extra}{org}\n\nApri l’app {app}, tocca «Ho un codice» e incolla questo codice per vedere a chi regali (non mostrarlo a nessuno 🤫):\n\n{code}',
+msg:'🎁 Ciao {name}! L’estrazione {group} è fatta.{extra}{org}\n\nApri l’app {app}, tocca «Ho un codice» e incolla questo codice per vedere a chi regali (non mostrarlo a nessuno 🤫):\n\n{code}',
 msgBudget:' Budget: {b}.',msgDate:' Scambio: {d}.',msgOrg:'\n👑 Organizza: {o}',
 pasteTitle:'Ho un codice',pasteSub:'Incolla qui il codice che ti ha inviato l’organizzatore.',pastePh:'Incolla il tuo codice…',discover:'Scopri',
 hello:'Ciao, {name}',tapOpen:'Tocca il regalo per aprirlo',secret:'🤫 Non dirlo a nessuno.',
@@ -162,7 +162,7 @@ mRedrawT:'Ripetere l’estrazione?',mRedrawX:'Tutto verrà riassegnato. Risultat
 mSpoilT:'Vedere tutti i risultati?',mSpoilX:'Se partecipi anche tu, ti rovinerai la sorpresa.',mSpoilOk:'Mostra comunque',results:'Risultati',close:'Chiudi',ok:'OK',cancel:'Annulla',
 payT:'Pagamento di {price}',payX:'Modalità demo: qui andrà il pagamento reale (Apple nell’app, Stripe sul web). Simulare il pagamento?',payOk:'Simula pagamento',
 pwTitle:'Estrazione premium',buyBtn:'Crea estrazione premium',noThanks:'Non voglio questi vantaggi',oneTime:'Pagamento unico per estrazione.',
-feats:['<b>Esclusioni</b> tra partecipanti 👀','<b>Partecipanti illimitati</b> (gratis fino a {max}) 👨‍👩‍👧‍👦','Completamente <b>senza pubblicità</b> 🙈','<b>Modifica totale</b> per evitare errori ✏️','<b>Assistenza personalizzata</b> 🙋','Metti in risalto il tuo <b>nome</b> 😎','Sostieni gli <b>sviluppatori</b> ❤️'],
+feats:['<b>Esclusioni</b> tra partecipanti 👀','<b>Partecipanti illimitati</b> (gratis fino a {max}) ♾️','Completamente <b>senza pubblicità</b> 🙈','<b>Modifica totale</b> per evitare errori ✏️','<b>Assistenza personalizzata</b> 🙋','Metti in risalto il tuo <b>nome</b> 😎','Sostieni gli <b>sviluppatori</b> ❤️'],
 adT:'Spazio pubblicitario',adX:'Passa a premium per {price} e togli la pubblicità',language:'Lingua'},
 
 de:{_name:'Deutsch',_flag:'🇩🇪',_loc:'de-DE',
@@ -183,7 +183,7 @@ premCard:'👑 Premium-Auslosung',organizes:'Organisiert von:',help:'Brauchst du
 redraw:'🔄 Neu auslosen',spoiler:'👀 Alle Ergebnisse ansehen',
 onlyLook:'Nur diese Person darf schauen',tapGift:'Tippe auf das Geschenk, um zu sehen, wen du beschenkst',youGive:'{name}, du beschenkst',budgetLbl:'Budget: {b}',memorize:'Merk es dir und verstecke es, bevor du das Handy weitergibst.',hide:'🙈 Verstecken und weitergeben',
 codeOf:'Code für {name}',codeWarn:'Dieser Code zeigt nur das Ergebnis von {name}. Öffne ihn nicht, wenn du mitmachst.',copyMsg:'Nachricht zum Senden kopieren',copyCode:'Nur den Code kopieren',
-msg:'🎁 Hallo {name}! Die Auslosung „{group}“ ist fertig.{extra}{org}\n\nÖffne die App {app}, tippe auf „Ich habe einen Code“ und füge diesen Code ein, um zu sehen, wen du beschenkst (zeig ihn niemandem 🤫):\n\n{code}',
+msg:'🎁 Hallo {name}! Die Auslosung {group} ist fertig.{extra}{org}\n\nÖffne die App {app}, tippe auf „Ich habe einen Code“ und füge diesen Code ein, um zu sehen, wen du beschenkst (zeig ihn niemandem 🤫):\n\n{code}',
 msgBudget:' Budget: {b}.',msgDate:' Übergabe: {d}.',msgOrg:'\n👑 Organisiert von: {o}',
 pasteTitle:'Ich habe einen Code',pasteSub:'Füge hier den Code ein, den dir der Organisator geschickt hat.',pastePh:'Code einfügen…',discover:'Aufdecken',
 hello:'Hallo, {name}',tapOpen:'Tippe auf das Geschenk, um es zu öffnen',secret:'🤫 Verrate es niemandem.',
@@ -195,7 +195,7 @@ mRedrawT:'Neu auslosen?',mRedrawX:'Alles wird neu zugeteilt. Gesehene Ergebnisse
 mSpoilT:'Alle Ergebnisse ansehen?',mSpoilX:'Wenn du mitmachst, verdirbst du dir die Überraschung.',mSpoilOk:'Trotzdem ansehen',results:'Ergebnisse',close:'Schließen',ok:'OK',cancel:'Abbrechen',
 payT:'Zahlung {price}',payX:'Demo-Modus: Hier kommt die echte Zahlung hin (Apple in der App, Stripe im Web). Zahlung simulieren?',payOk:'Zahlung simulieren',
 pwTitle:'Premium-Auslosung',buyBtn:'Premium-Auslosung erstellen',noThanks:'Ich will diese Vorteile nicht',oneTime:'Einmalzahlung pro Auslosung.',
-feats:['<b>Ausschlüsse</b> zwischen Teilnehmern 👀','<b>Unbegrenzte Teilnehmer</b> (gratis bis {max}) 👨‍👩‍👧‍👦','Komplett <b>werbefrei</b> 🙈','<b>Volle Bearbeitung</b> gegen Fehler ✏️','<b>Persönliche Hilfe</b> 🙋','Hebe deinen <b>Namen</b> hervor 😎','Unterstütze die <b>Entwickler</b> ❤️'],
+feats:['<b>Ausschlüsse</b> zwischen Teilnehmern 👀','<b>Unbegrenzte Teilnehmer</b> (gratis bis {max}) ♾️','Komplett <b>werbefrei</b> 🙈','<b>Volle Bearbeitung</b> gegen Fehler ✏️','<b>Persönliche Hilfe</b> 🙋','Hebe deinen <b>Namen</b> hervor 😎','Unterstütze die <b>Entwickler</b> ❤️'],
 adT:'Werbefläche',adX:'Hol dir Premium für {price} und entferne die Werbung',language:'Sprache'}
 };
 const LANGS=Object.keys(I18N);
@@ -205,33 +205,33 @@ function t(k,v={}){let s=(I18N[LANG][k]??I18N.es[k]??k);if(typeof s!=='string')r
 function setLang(l){LANG=l;try{localStorage.setItem('ai-lang',l)}catch(e){}document.documentElement.lang=l;document.title=t('appName');render()}
 // Textos de correo
 const I18N_MAIL={
-es:{emailPh:'Email (opcional)',sendEmail:'✉️ Enviar por correo',subject:'🎁 Tu resultado del sorteo «{group}»',errEmail:'Ese email no parece válido.',noEmail:'Sin email: copia el mensaje y envíalo por donde quieras.'},
-en:{emailPh:'Email (optional)',sendEmail:'✉️ Send by email',subject:'🎁 Your “{group}” draw result',errEmail:'That email doesn’t look valid.',noEmail:'No email: copy the message and send it however you like.'},
-pt:{emailPh:'Email (opcional)',sendEmail:'✉️ Enviar por email',subject:'🎁 O teu resultado do sorteio «{group}»',errEmail:'Esse email não parece válido.',noEmail:'Sem email: copia a mensagem e envia por onde quiseres.'},
-fr:{emailPh:'E-mail (facultatif)',sendEmail:'✉️ Envoyer par e-mail',subject:'🎁 Ton résultat du tirage « {group} »',errEmail:'Cet e-mail ne semble pas valide.',noEmail:'Pas d’e-mail : copiez le message et envoyez-le comme vous voulez.'},
-it:{emailPh:'Email (facoltativa)',sendEmail:'✉️ Invia per email',subject:'🎁 Il tuo risultato dell’estrazione «{group}»',errEmail:'Questa email non sembra valida.',noEmail:'Nessuna email: copia il messaggio e invialo come preferisci.'},
-de:{emailPh:'E-Mail (optional)',sendEmail:'✉️ Per E-Mail senden',subject:'🎁 Dein Ergebnis der Auslosung „{group}“',errEmail:'Diese E-Mail scheint ungültig zu sein.',noEmail:'Keine E-Mail: Kopiere die Nachricht und sende sie, wie du willst.'}};
+es:{emailPh:'Email (opcional)',sendEmail:'✉️ Enviar por correo',subject:'🎁 Tu resultado del sorteo {group}',errEmail:'Ese email no parece válido.',noEmail:'Sin email: copia el mensaje y envíalo por donde quieras.'},
+en:{emailPh:'Email (optional)',sendEmail:'✉️ Send by email',subject:'🎁 Your {group} draw result',errEmail:'That email doesn’t look valid.',noEmail:'No email: copy the message and send it however you like.'},
+pt:{emailPh:'Email (opcional)',sendEmail:'✉️ Enviar por email',subject:'🎁 O teu resultado do sorteio {group}',errEmail:'Esse email não parece válido.',noEmail:'Sem email: copia a mensagem e envia por onde quiseres.'},
+fr:{emailPh:'E-mail (facultatif)',sendEmail:'✉️ Envoyer par e-mail',subject:'🎁 Ton résultat du tirage {group}',errEmail:'Cet e-mail ne semble pas valide.',noEmail:'Pas d’e-mail : copiez le message et envoyez-le comme vous voulez.'},
+it:{emailPh:'Email (facoltativa)',sendEmail:'✉️ Invia per email',subject:'🎁 Il tuo risultato dell’estrazione {group}',errEmail:'Questa email non sembra valida.',noEmail:'Nessuna email: copia il messaggio e invialo come preferisci.'},
+de:{emailPh:'E-Mail (optional)',sendEmail:'✉️ Per E-Mail senden',subject:'🎁 Dein Ergebnis der Auslosung {group}',errEmail:'Diese E-Mail scheint ungültig zu sein.',noEmail:'Keine E-Mail: Kopiere die Nachricht und sende sie, wie du willst.'}};
 for(const l in I18N_MAIL)Object.assign(I18N[l],I18N_MAIL[l]);
 // Textos de enlaces y anuncios
 const I18N_LINK={
 es:{tabSend:'💬 Enviar enlaces',sendHint:'Envía a cada persona su enlace secreto por correo o WhatsApp. Al abrirlo verá solo su resultado.',linkOf:'Enlace de {name}',linkWarn:'Este enlace solo revela el resultado de {name}. No lo abras tú si también participas.',sendWa:'Enviar por WhatsApp',
-msg:'🎁 ¡Hola {name}! Ya está hecho el sorteo de «{group}».{extra}{org}\n\nAbre este enlace para ver a quién le regalas (no se lo enseñes a nadie 🤫):\n{link}',
-linkIntro:'Tienes un resultado esperándote en «{group}».',getApp:'Descargar en la App Store',continueWeb:'Ver en el navegador',adLabel:'Publicidad',adWait:'Tu resultado en {s}…',adContinue:'Ver mi resultado 🎁',makeOwn:'＋ Organizar mi propio sorteo'},
+msg:'🎁 ¡Hola {name}! Ya está hecho el sorteo de {group}.{extra}{org}\n\nAbre este enlace para ver a quién le regalas (no se lo enseñes a nadie 🤫):\n{link}',
+linkIntro:'Tienes un resultado esperándote en {group}.',getApp:'Descargar en la App Store',continueWeb:'Ver en el navegador',adLabel:'Publicidad',adWait:'Tu resultado en {s}…',adContinue:'Ver mi resultado 🎁',makeOwn:'＋ Organizar mi propio sorteo'},
 en:{tabSend:'💬 Send links',sendHint:'Send each person their secret link by email or WhatsApp. When they open it they only see their own result.',linkOf:'{name}’s link',linkWarn:'This link only reveals {name}’s result. Don’t open it yourself if you’re taking part.',sendWa:'Send via WhatsApp',
-msg:'🎁 Hi {name}! The “{group}” Secret Santa draw is done.{extra}{org}\n\nOpen this link to see who you’re buying for (don’t show anyone 🤫):\n{link}',
-linkIntro:'Your result for “{group}” is waiting for you.',getApp:'Download on the App Store',continueWeb:'View in browser',adLabel:'Advertisement',adWait:'Your result in {s}…',adContinue:'See my result 🎁',makeOwn:'＋ Organise my own draw'},
+msg:'🎁 Hi {name}! The {group} Secret Santa draw is done.{extra}{org}\n\nOpen this link to see who you’re buying for (don’t show anyone 🤫):\n{link}',
+linkIntro:'Your result for {group} is waiting for you.',getApp:'Download on the App Store',continueWeb:'View in browser',adLabel:'Advertisement',adWait:'Your result in {s}…',adContinue:'See my result 🎁',makeOwn:'＋ Organise my own draw'},
 pt:{tabSend:'💬 Enviar links',sendHint:'Envia a cada pessoa o seu link secreto por email ou WhatsApp. Ao abri-lo, só vê o seu resultado.',linkOf:'Link de {name}',linkWarn:'Este link só revela o resultado de {name}. Não o abras se também participas.',sendWa:'Enviar por WhatsApp',
-msg:'🎁 Olá {name}! O sorteio de «{group}» já está feito.{extra}{org}\n\nAbre este link para ver a quem ofereces (não mostres a ninguém 🤫):\n{link}',
-linkIntro:'Tens um resultado à tua espera em «{group}».',getApp:'Descarregar na App Store',continueWeb:'Ver no navegador',adLabel:'Publicidade',adWait:'O teu resultado em {s}…',adContinue:'Ver o meu resultado 🎁',makeOwn:'＋ Organizar o meu sorteio'},
+msg:'🎁 Olá {name}! O sorteio de {group} já está feito.{extra}{org}\n\nAbre este link para ver a quem ofereces (não mostres a ninguém 🤫):\n{link}',
+linkIntro:'Tens um resultado à tua espera em {group}.',getApp:'Descarregar na App Store',continueWeb:'Ver no navegador',adLabel:'Publicidade',adWait:'O teu resultado em {s}…',adContinue:'Ver o meu resultado 🎁',makeOwn:'＋ Organizar o meu sorteio'},
 fr:{tabSend:'💬 Envoyer les liens',sendHint:'Envoyez à chacun son lien secret par e-mail ou WhatsApp. En l’ouvrant, il ne verra que son résultat.',linkOf:'Lien de {name}',linkWarn:'Ce lien ne révèle que le résultat de {name}. Ne l’ouvrez pas si vous participez aussi.',sendWa:'Envoyer par WhatsApp',
-msg:'🎁 Salut {name} ! Le tirage « {group} » est fait.{extra}{org}\n\nOuvre ce lien pour voir à qui tu offres (ne le montre à personne 🤫) :\n{link}',
-linkIntro:'Ton résultat pour « {group} » t’attend.',getApp:'Télécharger dans l’App Store',continueWeb:'Voir dans le navigateur',adLabel:'Publicité',adWait:'Ton résultat dans {s}…',adContinue:'Voir mon résultat 🎁',makeOwn:'＋ Organiser mon propre tirage'},
+msg:'🎁 Salut {name} ! Le tirage {group} est fait.{extra}{org}\n\nOuvre ce lien pour voir à qui tu offres (ne le montre à personne 🤫) :\n{link}',
+linkIntro:'Ton résultat pour {group} t’attend.',getApp:'Télécharger dans l’App Store',continueWeb:'Voir dans le navigateur',adLabel:'Publicité',adWait:'Ton résultat dans {s}…',adContinue:'Voir mon résultat 🎁',makeOwn:'＋ Organiser mon propre tirage'},
 it:{tabSend:'💬 Invia link',sendHint:'Invia a ognuno il suo link segreto per email o WhatsApp. Aprendolo vedrà solo il suo risultato.',linkOf:'Link di {name}',linkWarn:'Questo link rivela solo il risultato di {name}. Non aprirlo se partecipi anche tu.',sendWa:'Invia su WhatsApp',
-msg:'🎁 Ciao {name}! L’estrazione «{group}» è fatta.{extra}{org}\n\nApri questo link per vedere a chi regali (non mostrarlo a nessuno 🤫):\n{link}',
-linkIntro:'Il tuo risultato di «{group}» ti aspetta.',getApp:'Scarica dall’App Store',continueWeb:'Vedi nel browser',adLabel:'Pubblicità',adWait:'Il tuo risultato tra {s}…',adContinue:'Vedi il mio risultato 🎁',makeOwn:'＋ Organizza la mia estrazione'},
+msg:'🎁 Ciao {name}! L’estrazione {group} è fatta.{extra}{org}\n\nApri questo link per vedere a chi regali (non mostrarlo a nessuno 🤫):\n{link}',
+linkIntro:'Il tuo risultato di {group} ti aspetta.',getApp:'Scarica dall’App Store',continueWeb:'Vedi nel browser',adLabel:'Pubblicità',adWait:'Il tuo risultato tra {s}…',adContinue:'Vedi il mio risultato 🎁',makeOwn:'＋ Organizza la mia estrazione'},
 de:{tabSend:'💬 Links senden',sendHint:'Schick jeder Person ihren geheimen Link per E-Mail oder WhatsApp. Beim Öffnen sieht sie nur ihr Ergebnis.',linkOf:'Link für {name}',linkWarn:'Dieser Link zeigt nur das Ergebnis von {name}. Öffne ihn nicht, wenn du mitmachst.',sendWa:'Per WhatsApp senden',
-msg:'🎁 Hallo {name}! Die Auslosung „{group}“ ist fertig.{extra}{org}\n\nÖffne diesen Link, um zu sehen, wen du beschenkst (zeig ihn niemandem 🤫):\n{link}',
-linkIntro:'Dein Ergebnis für „{group}“ wartet auf dich.',getApp:'Im App Store laden',continueWeb:'Im Browser ansehen',adLabel:'Werbung',adWait:'Dein Ergebnis in {s}…',adContinue:'Mein Ergebnis ansehen 🎁',makeOwn:'＋ Eigene Auslosung organisieren'}};
+msg:'🎁 Hallo {name}! Die Auslosung {group} ist fertig.{extra}{org}\n\nÖffne diesen Link, um zu sehen, wen du beschenkst (zeig ihn niemandem 🤫):\n{link}',
+linkIntro:'Dein Ergebnis für {group} wartet auf dich.',getApp:'Im App Store laden',continueWeb:'Im Browser ansehen',adLabel:'Werbung',adWait:'Dein Ergebnis in {s}…',adContinue:'Mein Ergebnis ansehen 🎁',makeOwn:'＋ Eigene Auslosung organisieren'}};
 for(const l in I18N_LINK)Object.assign(I18N[l],I18N_LINK[l]);
 // Textos del servidor (quién ha abierto, enviar a todos)
 const I18N_SRV={
@@ -251,3 +251,13 @@ fr:{payUnavailable:'Les paiements ne sont pas encore disponibles. Réessayez plu
 it:{payUnavailable:'I pagamenti non sono ancora disponibili. Riprova più tardi.',payError:'Impossibile completare il pagamento. Non ti è stato addebitato nulla.',shareMsg:'📤 Condividi…',openApp:'Ho già l’app: apri'},
 de:{payUnavailable:'Zahlungen sind noch nicht verfügbar. Versuch es später.',payError:'Die Zahlung konnte nicht abgeschlossen werden. Dir wurde nichts berechnet.',shareMsg:'📤 Teilen…',openApp:'Ich habe die App: öffnen'}};
 for(const l in I18N_APP)Object.assign(I18N[l],I18N_APP[l]);
+
+// Enlaces cortos y versión web solo para descargar la app
+const I18N_WEB={
+es:{msgNeedApp:'\nPara verlo necesitas la app Secretoogift (gratis).',loading:'Cargando…',linkBadT:'Este enlace ya no funciona',linkBadX:'Puede que el sorteo se haya repetido o que haya caducado. Pídele al organizador un enlace nuevo.',needApp:'Para ver a quién le regalas, descarga la app gratis.',makeOwnWeb:'Descarga la app y organiza tu sorteo'},
+en:{msgNeedApp:'\nYou’ll need the free Secretoogift app to see it.',loading:'Loading…',linkBadT:'This link no longer works',linkBadX:'The draw may have been redone or expired. Ask the organiser for a new link.',needApp:'To see who you’re buying for, download the free app.',makeOwnWeb:'Get the app and organise your own draw'},
+pt:{msgNeedApp:'\nPara o veres precisas da app Secretoogift (grátis).',loading:'A carregar…',linkBadT:'Este link já não funciona',linkBadX:'O sorteio pode ter sido repetido ou ter expirado. Pede um link novo ao organizador.',needApp:'Para veres a quem ofereces, descarrega a app grátis.',makeOwnWeb:'Descarrega a app e organiza o teu sorteio'},
+fr:{msgNeedApp:'\nPour le voir, il te faut l’app gratuite Secretoogift.',loading:'Chargement…',linkBadT:'Ce lien ne fonctionne plus',linkBadX:'Le tirage a peut-être été refait ou a expiré. Demande un nouveau lien à l’organisateur.',needApp:'Pour voir à qui tu offres, télécharge l’app gratuite.',makeOwnWeb:'Télécharge l’app et organise ton tirage'},
+it:{msgNeedApp:'\nPer vederlo ti serve l’app gratuita Secretoogift.',loading:'Caricamento…',linkBadT:'Questo link non funziona più',linkBadX:'L’estrazione potrebbe essere stata ripetuta o scaduta. Chiedi un nuovo link all’organizzatore.',needApp:'Per vedere a chi fai il regalo, scarica l’app gratuita.',makeOwnWeb:'Scarica l’app e organizza la tua estrazione'},
+de:{msgNeedApp:'\nDazu brauchst du die kostenlose App Secretoogift.',loading:'Wird geladen…',linkBadT:'Dieser Link funktioniert nicht mehr',linkBadX:'Die Auslosung wurde vielleicht wiederholt oder ist abgelaufen. Bitte den Organisator um einen neuen Link.',needApp:'Lade die kostenlose App, um zu sehen, wen du beschenkst.',makeOwnWeb:'App laden und eigene Auslosung organisieren'}};
+for(const l in I18N_WEB)Object.assign(I18N[l],I18N_WEB[l]);

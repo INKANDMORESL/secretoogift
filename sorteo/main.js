@@ -266,7 +266,10 @@ function ensureIds(g){
 async function syncGroup(g){
   if(!apiOk||!g.assignments)return;
   ensureIds(g);
-  try{await api('register',{},{d:g.id,k:g.key,people:g.people.map(p=>({t:p.tok,n:p.name,e:p.email||''}))});g.synced=true;save()}catch(e){}
+  try{const r=await api('register',{},{d:g.id,k:g.key,people:g.people.map(p=>({t:p.tok,n:p.name,e:p.email||'',c:codeFor(g,p.id)}))});
+    const cortos=r.cortos||{};g.people.forEach(p=>{if(cortos[p.tok])p.short=cortos[p.tok]});
+    g.synced=true;save();
+    if((view.name==='code'||view.name==='group')&&view.id===g.id)render()}catch(e){}
 }
 async function refreshStatus(id){
   const g=getGroup(id);if(!g||!apiOk)return;
@@ -284,7 +287,23 @@ const LINK_BASE=(/^https?:$/.test(location.protocol)&&!/claude|anthropic|claudeu
   : 'https://__DOMINIO__/sorteo/';
 const APPSTORE_URL='https://apps.apple.com/app/id__APPSTORE_ID__'; // se pone al construir (variable APPSTORE_ID de GitHub)
 const AD_SECONDS=5;
-const linkFor=(g,fromId)=>LINK_BASE+'#'+codeFor(g,fromId);
+// Enlace corto (https://dominio/s/Ab3xK9) cuando el servidor ya lo ha guardado; si no, el largo con todo dentro
+const SHORT_BASE=LINK_BASE.replace(/\/sorteo\/.*$/,'/s/');
+const linkFor=(g,fromId)=>{const p=g.people.find(x=>x.id===fromId);
+  return p&&p.short&&g.synced?SHORT_BASE+p.short:LINK_BASE+'#'+codeFor(g,fromId)};
+const esCorto=h=>/^[0-9A-Za-z]{4,16}$/.test(h)&&!/^[0-9a-f]{40,}$/i.test(h);
+// Abre el resultado de un enlace: código largo (todo dentro) o corto (se pide al servidor)
+function abrirEnlace(h){
+  if(!h)return false;
+  if(/^[0-9a-f]{40,}$/i.test(h)){const d=decode(h);if(d){go({name:'mine',data:d});return true}return false}
+  if(esCorto(h)){
+    go({name:'mine',cargando:true});
+    api('get',{s:h}).then(r=>{const d=r&&r.c?decode(r.c):null;go(d?{name:'mine',data:d}:{name:'mine',malo:true})})
+      .catch(()=>go({name:'mine',malo:true}));
+    return true;
+  }
+  return false;
+}
 
 function adNext(){if(view.name==='mine')view.stage='result';else view.adDone=true;render()}
 function adView(){
@@ -321,7 +340,8 @@ function passView(){
 function msgFor(g,p){
   const extra=(g.budget?t('msgBudget',{b:g.budget}):'')+(g.date?t('msgDate',{d:fmtDate(g.date)}):'');
   const org=g.premium&&g.organizer?t('msgOrg',{o:g.organizer}):'';
-  return t('msg',{name:p.name,group:g.name,extra,org,link:linkFor(g,p.id)});
+  const app=g.premium?'':t('msgNeedApp');
+  return t('msg',{name:p.name,group:g.name,extra:extra+app,org,link:linkFor(g,p.id)});
 }
 function codeView(){
   const g=getGroup(view.id),p=g.people.find(x=>x.id===view.pid);
@@ -343,15 +363,19 @@ function codeView(){
 
 function mineView(){
   const d=view.data;
-  if(!d)return homeView();
-  const stage=view.stage||(IS_APP?'gift':'web');
+  const logoGrande=`<img src="${LOGO}" alt="" style="width:120px;height:120px;border-radius:50%;box-shadow:0 8px 24px rgba(11,58,122,.2)">`;
+  if(view.cargando)return `<div class="reveal">${logoGrande}<p class="muted">${t('loading')}</p></div>`;
+  if(view.malo||!d)return `<div class="reveal">${logoGrande}<h2>${t('linkBadT')}</h2><p class="muted">${t('linkBadX')}</p>
+    ${IS_APP?`<button class="btn line" data-act="home">${t('makeOwn')}</button>`:`<a class="btn dark" href="${APPSTORE_URL}" target="_blank" rel="noopener">${t('getApp')}</a>`}</div>`;
+  // En el navegador: solo los sorteos premium enseñan el resultado; los gratis, solo en la app (con anuncio)
+  const stage=view.stage||(IS_APP||d.p?'gift':'web');
   if(stage==='web')return `<div class="reveal">
-    <img src="${LOGO}" alt="" style="width:120px;height:120px;border-radius:50%;box-shadow:0 8px 24px rgba(11,58,122,.2)">
+    ${logoGrande}
     <h1>${esc(t('hello',{name:d.f}))}</h1>
     <p class="muted">${esc(t('linkIntro',{group:d.g}))}</p>
-    <a class="btn primary" href="secretoogift://r${esc(location.hash)}">${t('openApp')}</a>
-    <a class="btn dark" href="${APPSTORE_URL}" target="_blank" rel="noopener">${t('getApp')}</a>
-    <button class="nothanks" data-act="webgo">${t('continueWeb')}</button></div>`;
+    <p style="font-weight:600">${t('needApp')}</p>
+    <a class="btn primary" href="${APPSTORE_URL}" target="_blank" rel="noopener">${t('getApp')}</a>
+    <a class="btn line" href="secretoogift://r${esc(location.hash)}">${t('openApp')}</a></div>`;
   if(stage==='gift')return `<div class="reveal"><p class="muted">${esc(d.g)}</p><h1>${esc(t('hello',{name:d.f}))}</h1>${giftHTML()}<p class="muted">${t('tapOpen')}</p></div>`;
   if(stage==='ad')return adView();
   if(d.i&&d.o&&!view.pinged){view.pinged=true;api('open',{d:d.i,t:d.o}).catch(()=>{})}
@@ -359,7 +383,7 @@ function mineView(){
     <div class="result"><div class="meta">${esc(t('youGive',{name:d.f}))}</div><div class="to">${esc(d.t)}</div>
     <div class="meta">${metaLine(d.b,d.d)}</div></div>
     <p class="muted small">${t('secret')}</p>
-    <button class="btn line" data-act="home">${t('makeOwn')}</button></div>`;
+    ${IS_APP?`<button class="btn line" data-act="home">${t('makeOwn')}</button>`:`<a class="btn line" href="${APPSTORE_URL}" target="_blank" rel="noopener">${t('makeOwnWeb')}</a>`}</div>`;
 }
 
 // ---------- Eventos ----------
@@ -394,7 +418,7 @@ function bind(){
   a.onclick=e=>{
     const el=e.target.closest('[data-act],[data-open],[data-delp],[data-delex],[data-tab],[data-pass],[data-code],.gift');if(!el)return;
     const act=el.dataset.act;
-    if(el.classList.contains('gift')){if(view.name==='mine'){view.stage=view.data.p?'result':'ad'}else view.open=true;render();return}
+    if(el.classList.contains('gift')){if(view.name==='mine'){view.stage=(view.data.p||!IS_APP)?'result':'ad'}else view.open=true;render();return}
     if(el.dataset.open){go({name:'group',id:el.dataset.open,tab:'pass'});return}
     if(el.dataset.tab){view.tab=el.dataset.tab;render();return}
     if(el.dataset.pass){go({name:'pass',id:view.id,pid:el.dataset.pass,tab:view.tab});return}
@@ -427,7 +451,7 @@ function bind(){
       case 'pwback':go(view.back);break;
       case 'pwfree':view.onFree();break;
       case 'pwbuy':{const v=view;buyPremium(()=>{
-        if(v.target==='draft')draft.premium=true;else{const g=getGroup(v.target);g.premium=true;save()}
+        if(v.target==='draft')draft.premium=true;else{const g=getGroup(v.target);g.premium=true;g.synced=false;save();syncGroup(g)}
         v.after();});break}
       case 'edit':{const g=getGroup(view.id);
         if(!g.premium){const id=g.id;openPaywall({target:id,back:{name:'group',id,tab:view.tab},after:()=>{draft=JSON.parse(JSON.stringify(getGroup(id)));draft._new=false;go({name:'edit'})}});break}
@@ -464,8 +488,12 @@ function bind(){
 (function init(){
   document.documentElement.lang=LANG;document.title=t('appName');
   const h=(location.hash||'').slice(1);
-  if(h&&/^[0-9a-f]+$/i.test(h)){const d=decode(h);if(d){view={name:'mine',data:d}}}
-  render();
+  const enWebPropia=!IS_APP&&/^https?:$/.test(location.protocol)&&!/claude|anthropic|claudeusercontent|127\.0\.0\.1|localhost/.test(location.hostname);
+  if(!abrirEnlace(h)){
+    // Sin enlace de resultado: en tu web, a la portada para descargar la app (los sorteos solo se hacen en la app)
+    if(enWebPropia){location.replace(location.origin+'/');return}
+    render();
+  }
   api('ping').then(()=>{apiOk=true;state.groups.forEach(g=>{if(g.assignments&&!g.synced)syncGroup(g)});if(view.name==='group'){refreshStatus(view.id);render()}if(view.name==='code')render()}).catch(()=>{});
-  window.addEventListener('hashchange',()=>{const h=(location.hash||'').slice(1);const d=h&&/^[0-9a-f]+$/i.test(h)?decode(h):null;if(d)go({name:'mine',data:d})});
+  window.addEventListener('hashchange',()=>abrirEnlace((location.hash||'').slice(1)));
 })();
