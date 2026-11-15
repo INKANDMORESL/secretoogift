@@ -62,3 +62,11 @@ jobs:
           cat salida.txt
           grep -v '^\s*$' salida.txt | tail -n 12 | while IFS= read -r l; do echo "::error title=TypeScript::$l"; done
           exit 1
+
+      - name: Empaquetar el código como en la compilación (iPhone)
+        working-directory: movil
+        run: |
+          npx expo export --platform ios --output-dir /tmp/export > salida.txt 2>&1 && { tail -n 5 salida.txt; exit 0; }
+          cat salida.txt
+          grep -v '^\s*$' salida.txt | tail -n 15 | while IFS= read -r l; do echo "::error title=Empaquetar::$l"; done
+          exit 1
