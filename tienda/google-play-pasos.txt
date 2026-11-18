@@ -1,0 +1,105 @@
+SECRETOOGIFT · GOOGLE PLAY PASO A PASO
+(Todo en play.google.com/console con la cuenta de desarrollador de INKANDMORE SL, la de Yococino.)
+
+==================================================================
+1. CREAR LA APP
+==================================================================
+Inicio → «Crear aplicación»
+• Nombre de la aplicación: Secretoogift: Amigo invisible
+• Idioma predeterminado: Español (España) – es-ES
+• Aplicación o juego: Aplicación
+• Gratis o de pago: Gratis
+• Marcar las dos declaraciones → «Crear aplicación»
+
+==================================================================
+2. SUBIR LA APP (prueba interna)
+==================================================================
+Menú → Pruebas → Pruebas internas → «Crear nueva versión»
+• Firma de aplicaciones de Google Play: «Continuar» (la gestiona Google).
+• Paquetes de aplicaciones: sube el archivo .aab que te paso (secretoogift.aab).
+• Nombre de la versión: 1.0.0
+• Notas de la versión: Primera versión de Secretoogift.
+• «Siguiente» → «Guardar y publicar».
+• Pestaña «Testers»: crea una lista con tu Gmail y guarda. Copia el enlace «Unirse en Android» para instalarla.
+
+==================================================================
+3. COMPRA DENTRO DE LA APP (solo aparece después de subir la app)
+==================================================================
+Menú → Monetizar con Play → Productos → Productos únicos → «Crear producto»
+• ID del producto: secretoogift_sorteo_premium   (exacto)
+• Nombre: Sorteo premium
+• Descripción: Sin anuncios, exclusiones e ilimitados en un sorteo.
+• Precio: 0,99 € → «Actualizar los precios de otros países» (los convierte solo)
+• Tipo de compra: Consumible / se puede comprar varias veces
+• «Guardar» y «Activar»
+
+==================================================================
+4. CONTENIDO DE LA APLICACIÓN (Menú → Política y programas → Contenido de la aplicación)
+==================================================================
+• Política de privacidad: https://secretoogift.com/legal.html
+• Acceso a la aplicación: «Toda la funcionalidad está disponible sin acceso especial»
+• Anuncios: «Sí, mi aplicación contiene anuncios»
+• Clasificación de contenido: Categoría «Todas las demás tipos de aplicaciones» → responde «No» a todo
+  (violencia, sexo, lenguaje, drogas, apuestas…). Compras digitales: Sí. Correo: el de soporte.
+• Público objetivo: 18 años o más (marca solo «18 y más»). Así no entra en el programa de familias.
+• Aplicaciones de noticias: No
+• Aplicación del Gobierno: No · Funciones financieras: Ninguna · Salud: No
+• ID de publicidad: «Sí» → uso: Publicidad o marketing (la usa AdMob)
+
+SEGURIDAD DE LOS DATOS:
+• ¿Recoge o comparte datos? Sí
+• ¿Están cifrados en tránsito? Sí
+• ¿Los usuarios pueden pedir que se eliminen? Sí (escribiendo a info@secretoogift.com)
+• Tipos de datos:
+  - Información personal → Dirección de correo electrónico: Recogidos, no compartidos, opcional.
+    Finalidad: Funcionalidad de la aplicación.
+  - Información personal → Nombre: Recogidos, no compartidos, obligatorio. Finalidad: Funcionalidad de la aplicación.
+    (Son los nombres de los participantes del sorteo.)
+  - Información y rendimiento de la aplicación → Registros de fallos: No
+  - Identificadores de dispositivo u otros → ID de dispositivo: Recogidos y compartidos (AdMob).
+    Finalidad: Publicidad o marketing.
+  - Actividad en la aplicación → Interacciones con la aplicación: Recogidos y compartidos (AdMob).
+    Finalidad: Publicidad o marketing, Analíticas.
+  - Información financiera → Historial de compras: Recogidos, no compartidos. Finalidad: Funcionalidad de la aplicación.
+  Ninguno se trata de forma efímera. No se usan para rastreo entre apps de otras empresas.
+
+==================================================================
+5. FICHA DE PLAY STORE (Menú → Crecer → Presencia en Play Store → Ficha principal)
+==================================================================
+• Nombre: Secretoogift: Amigo invisible
+• Descripción breve: Organiza el amigo invisible en un minuto. Enlaces secretos, sin registro.
+• Descripción completa: la de Español en textos-app-store.txt
+• Icono: google-play/icono-512.png
+• Gráfico de funciones: google-play/grafico-es.png
+• Capturas de teléfono: google-play/es-1.png … es-5.png
+• Para otros idiomas: «Gestionar traducciones» → «Añadir tus propias traducciones» → en-GB, en-US, pt-PT, pt-BR,
+  fr-FR, it-IT, de-DE, y pega los textos y las imágenes de cada idioma (en-, pt-, fr-, it-, de-).
+Menú → Ajustes de Play Store:
+• Categoría: Estilo de vida · Correo: info@secretoogift.com · Web: https://secretoogift.com/
+
+==================================================================
+6. PAÍSES (Menú → Producción → Países o regiones)
+==================================================================
+• Añadir países → seleccionar todos.
+
+==================================================================
+7. ADMOB (para cobrar los anuncios)
+==================================================================
+admob.google.com → Apps → Añadir app → Android → «No» está publicada → Nombre: Secretoogift
+• Copia el ID de la app (con ~) → GitHub, variable ADMOB_ANDROID_APP_ID
+• Bloques de anuncios → Intersticial → «Antes del resultado» → copia el ID (con /) → variable ADMOB_ANDROID_INTERSTITIAL
+(El aviso de privacidad de Europa que creaste para iPhone: edítalo y marca también la app de Android.)
+
+==================================================================
+8. REVENUECAT (para que funcione el pago)
+==================================================================
+app.revenuecat.com → proyecto Secretoogift → Apps & providers → + New → Play Store
+• Package name: app.secretoogift
+• Service Account credentials: sube el MISMO archivo .json que usaste en Yococino.
+  Antes, en Play Console → Usuarios y permisos → esa cuenta de servicio → «Permisos de la aplicación» →
+  «Añadir aplicación» → Secretoogift, con permisos de ver datos financieros y gestionar pedidos.
+• Product catalog → Products → + New → secretoogift_sorteo_premium (app Play Store)
+• API keys → copia la clave pública de Play Store (empieza por goog_) → GitHub, variable REVENUECAT_ANDROID_KEY
+
+Cuando estén las 3 variables (ADMOB_ANDROID_APP_ID, ADMOB_ANDROID_INTERSTITIAL, REVENUECAT_ANDROID_KEY),
+Claude crea la versión definitiva y la subes igual que en el paso 2, pero en «Producción» → «Enviar a revisión».
