@@ -23,6 +23,7 @@
   En el navegador solo se ven resultados de sorteos PREMIUM; los gratis piden descargar la app (y allí, anuncio). Sin enlace, /sorteo/ redirige a la portada: los sorteos solo se crean en la app.
 - `servidor/api.php`: PHP sin base de datos (JSON en `sorteo/data/`, se borra a los 120 días). Acciones: register (devuelve `cortos`), get, open,
   status, mail (solo a emails guardados, límite por sorteo). Remitente FROM_EMAIL = EMAIL_REMITENTE.
+- Panel `web/panel/index.php` (https://DOMINIO/panel/): contraseña propia (la crea el dueño la primera vez, `sorteo/data/panel.json`). Lee `servidor/estadisticas.php`: `est_AAAA-MM.json` (cuentas por día: sorteos, participantes, premium, abiertos, correos, ad, web, paywall; `_tam`, `_idioma`) y `pagos.jsonl` (aviso de RevenueCat → `api.php?a=revenuecat&clave=…`). Ingresos «te llega» = precio sin IVA (17,36 %) y sin el 15 % de Apple; anuncios = estimación con eCPM ajustable. La app manda `api.php?a=ev&e=ad|paywall` y la portada `e=web`. La limpieza de 120 días solo borra d_, s_ y rl_.
 - `web/`: portada para descargar la app (6 idiomas, capturas en `web/img/{idioma}_{home,gift,group}.webp`) y `legal.html`.
 - `tienda/`: capturas App Store 1320×2868 (`capturas.py`) y `textos-app-store.txt`.
 

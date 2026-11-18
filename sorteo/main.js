@@ -114,7 +114,10 @@ function buyPremium(onDone){
 }
 const adHTML=()=>`<div class="ad"><b>${t('adT')}</b>${t('adX',{price:price()})}</div>`;
 
+// Contadores para el panel (sin datos personales)
+function contar(e){if(apiOk)api('ev',{e}).catch(()=>{})}
 function paywallView(){
+  if(!view._contado){view._contado=true;contar('paywall')}
   return `<div class="top"><button class="back" data-act="pwback">‹</button><h2 style="flex:1;text-align:center;margin-right:50px">${t('pwTitle')}</h2></div>
   ${t('feats').map(f=>`<div class="feat"><span class="ck">✓</span><span>${f.replace('{max}',FREE_MAX)}</span></div>`).join('')}
   <button class="buy" data-act="pwbuy"><span class="l">${t('buyBtn')}</span><span class="r">${price()}</span></button>
@@ -300,7 +303,7 @@ function ensureIds(g){
 async function syncGroup(g){
   if(!apiOk||!g.assignments)return;
   ensureIds(g);
-  try{const r=await api('register',{},{d:g.id,k:g.key,people:g.people.map(p=>({t:p.tok,n:p.name,e:p.email||'',c:codeFor(g,p.id)}))});
+  try{const r=await api('register',{},{d:g.id,k:g.key,p:g.premium?1:0,l:LANG,people:g.people.map(p=>({t:p.tok,n:p.name,e:p.email||'',c:codeFor(g,p.id)}))});
     const cortos=r.cortos||{};g.people.forEach(p=>{if(cortos[p.tok])p.short=cortos[p.tok]});
     g.synced=true;save();
     if(['code','group','send'].includes(view.name)&&view.id===g.id)render()}catch(e){}
@@ -342,7 +345,7 @@ function abrirEnlace(h){
 function adNext(){if(view.name==='mine')view.stage='result';else view.adDone=true;render()}
 function adView(){
   if(IS_APP){
-    if(!view._adPedido){view._adPedido=true;setTimeout(()=>{const v=view;nativo('anuncio').then(()=>{if(view===v)adNext()})},0)}
+    if(!view._adPedido){view._adPedido=true;contar('ad');setTimeout(()=>{const v=view;nativo('anuncio').then(()=>{if(view===v)adNext()})},0)}
     return `<div class="reveal"><img src="${LOGO}" alt="" style="width:110px;height:110px;border-radius:50%;opacity:.9"><p class="muted">${t('adLabel')}…</p></div>`;
   }
   return `<div class="adfull">

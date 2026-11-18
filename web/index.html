@@ -338,6 +338,8 @@ document.querySelectorAll('[data-store]').forEach(a=>{if(APPSTORE_URL){a.href=AP
 document.getElementById('yr').textContent=new Date().getFullYear();
 const m=document.getElementById('mail');m.href='mailto:'+SUPPORT;m.textContent=SUPPORT;
 render();
+// Visita a la portada (solo un contador para el panel, sin cookies)
+try{if(!sessionStorage.getItem('sg-v')){sessionStorage.setItem('sg-v','1');fetch('/sorteo/api.php?a=ev&e=web').catch(()=>{})}}catch(e){}
 </script>
 </body>
 </html>

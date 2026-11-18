@@ -50,10 +50,12 @@ function rate_limit($what, $max) {
 
 // ---- Envío de correo: SMTP de IONOS (si está configurado en correo.php) o, si no, mail() ----
 require_once __DIR__ . '/correo-smtp.php';
+require_once __DIR__ . '/estadisticas.php';
 
 // Limpieza ocasional de sorteos antiguos
 if (mt_rand(1, 50) === 1) {
-  foreach (glob("$DIR/*.json") as $f) { if (filemtime($f) < time() - KEEP_DAYS * 86400) @unlink($f); }
+  // Solo sorteos (d_), enlaces cortos (s_) y límites (rl_): nunca estadísticas, pagos ni ajustes
+  foreach (array_merge(glob("$DIR/d_*.json"), glob("$DIR/s_*.json"), glob("$DIR/rl_*.json")) as $f) { if (filemtime($f) < time() - KEEP_DAYS * 86400) @unlink($f); }
 }
 
 $a  = $_GET['a'] ?? '';
@@ -85,7 +87,13 @@ switch ($a) {
       if ($s !== '') { file_put_contents("$DIR/s_$s.json", json_encode(['d' => $d, 't' => $t]), LOCK_EX); $cortos[$t] = $s; }
       $list[$t] = ['n' => mb_substr((string)($p['n'] ?? ''), 0, 40), 'e' => $e, 'c' => $c, 's' => $s];
     }
+    $prem = isset($in['p']) ? !empty($in['p']) : (est_premium_de_codigo(reset($list)['c'] ?? '') ?? false);
+    $idioma = preg_replace('/[^a-z]/', '', substr((string)($in['l'] ?? ($old['l'] ?? '')), 0, 2));
+    if (!$old) est_sumar(['sorteos' => 1, 'participantes' => count($list), 'premium' => $prem ? 1 : 0,
+                          'tam' => [est_tam(count($list)) => 1], 'idioma' => [$idioma ?: '?' => 1]]);
+    elseif ($prem && empty($old['p'])) est_sumar(['premium' => 1]);
     store($d, [
+      'p' => $prem || !empty($old['p']), 'l' => $idioma, 'est' => 1,
       'k' => hash('sha256', $k),
       'people' => $list,
       'opened' => [],
@@ -112,7 +120,7 @@ switch ($a) {
     $d = cid($_GET['d'] ?? ''); $t = cid($_GET['t'] ?? '');
     $draw = load($d);
     if (!$draw || !isset($draw['people'][$t])) out(['ok' => 0]);
-    if (empty($draw['opened'][$t])) { $draw['opened'][$t] = time(); store($d, $draw); }
+    if (empty($draw['opened'][$t])) { $draw['opened'][$t] = time(); store($d, $draw); est_sumar(['abiertos' => 1]); }
     out(['ok' => 1]);
   }
 
@@ -142,7 +150,28 @@ switch ($a) {
       if (enviar_correo($to, $subject, $body, $html)) { $sent++; $draw['mails']++; }
     }
     store($d, $draw);
+    if ($sent) est_sumar(['correos' => $sent]);
     out(['sent' => $sent]);
+  }
+
+  // Contadores sueltos de la app y de la web (sin datos personales)
+  case 'ev': {
+    $e = (string)($_GET['e'] ?? '');
+    if (!in_array($e, ['ad', 'web', 'paywall', 'pass'], true)) fail('bad');
+    rate_limit('ev', 300);
+    est_sumar([$e => 1]);
+    out(['ok' => 1]);
+  }
+
+  // Aviso de RevenueCat con cada compra (Authorization = secreto que da el panel)
+  case 'revenuecat': {
+    $c = panel_config();
+    $auth = (string)($_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '');
+    $auth = preg_replace('/^Bearer\s+/i', '', $auth);
+    if ($auth === '') $auth = (string)($_GET['clave'] ?? '');   // IONOS a veces quita la cabecera: la clave también vale en la URL
+    if (empty($c['webhook']) || !hash_equals($c['webhook'], $auth)) fail('forbidden', 403);
+    est_pago_revenuecat($in);
+    out(['ok' => 1]);
   }
 
   default:
