@@ -14,7 +14,14 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "CFBundleDevelopmentRegion": "es",
-        "CFBundleLocalizations": ["es", "en", "pt", "fr", "it", "de"],
+        "CFBundleLocalizations": [
+          "es",
+          "en",
+          "pt",
+          "fr",
+          "it",
+          "de"
+        ],
         "CFBundleAllowMixedLocalizations": true
       }
     },
@@ -24,7 +31,9 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permissions": ["com.android.vending.BILLING"]
+      "permissions": [
+        "com.android.vending.BILLING"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -45,7 +54,8 @@
           "androidAppId": "ca-app-pub-3940256099942544~3347511713",
           "delayAppMeasurementInit": true
         }
-      ]
+      ],
+      "./plugins/pantalla-opcional"
     ]
   },
   "react-native-google-mobile-ads": {
