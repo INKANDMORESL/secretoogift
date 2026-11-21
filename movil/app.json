@@ -22,7 +22,8 @@
           "it",
           "de"
         ],
-        "CFBundleAllowMixedLocalizations": true
+        "CFBundleAllowMixedLocalizations": true,
+        "NSUserTrackingUsageDescription": "Usamos este permiso solo para mostrar anuncios en los sorteos gratis. Si no lo das, verás anuncios igualmente, pero menos relevantes."
       }
     },
     "android": {
@@ -55,8 +56,22 @@
           "delayAppMeasurementInit": true
         }
       ],
+      [
+        "expo-tracking-transparency",
+        {
+          "userTrackingPermission": "Usamos este permiso solo para mostrar anuncios en los sorteos gratis. Si no lo das, verás anuncios igualmente, pero menos relevantes."
+        }
+      ],
       "./plugins/pantalla-opcional"
-    ]
+    ],
+    "locales": {
+      "es": "./locales/es.json",
+      "en": "./locales/en.json",
+      "pt": "./locales/pt.json",
+      "fr": "./locales/fr.json",
+      "it": "./locales/it.json",
+      "de": "./locales/de.json"
+    }
   },
   "react-native-google-mobile-ads": {
     "ios_app_id": "ca-app-pub-3940256099942544~1458002511",

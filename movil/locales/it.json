@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSUserTrackingUsageDescription": "Usiamo questo permesso solo per mostrare annunci nelle estrazioni gratuite. Se non lo concedi, vedrai comunque annunci, ma meno pertinenti."
+  }
+}

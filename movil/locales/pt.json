@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSUserTrackingUsageDescription": "Usamos esta permissão apenas para mostrar anúncios nos sorteios gratuitos. Se não permitir, verá anúncios na mesma, mas menos relevantes."
+  }
+}

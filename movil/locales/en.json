@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSUserTrackingUsageDescription": "We use this permission only to show ads in free draws. If you don't allow it, you'll still see ads, just less relevant ones."
+  }
+}

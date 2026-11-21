@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSUserTrackingUsageDescription": "Nous utilisons cette autorisation uniquement pour afficher des publicités dans les tirages gratuits. Sans elle, vous verrez quand même des publicités, mais moins pertinentes."
+  }
+}

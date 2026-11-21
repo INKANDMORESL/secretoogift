@@ -330,7 +330,7 @@ PRIVACIDAD DE LA APP (App Store Connect → Privacidad de la app)
 ¿Recopila datos? Sí.
 • Información de contacto → Correo electrónico: Funcionalidad de la app. No vinculado a la identidad. No se usa para rastreo.
   (Son los emails de los participantes, solo para enviarles su enlace; se borran a los 120 días.)
-• Identificadores → ID del dispositivo: Publicidad de terceros (Google AdMob). No vinculado. No rastreo (anuncios no personalizados).
+• Identificadores → ID del dispositivo: Publicidad de terceros (Google AdMob). No vinculado. SÍ se usa para rastreo (lo pide Apple por el aviso de Google; la app pide permiso con App Tracking Transparency).
 • Datos de uso → Interacción con el producto: Publicidad de terceros (Google AdMob). No vinculado. No rastreo.
 • Compras → Historial de compras: Funcionalidad de la app (RevenueCat). No vinculado. No rastreo.
 
@@ -338,6 +338,8 @@ PRIVACIDAD DE LA APP (App Store Connect → Privacidad de la app)
 NOTAS PARA LA REVISIÓN DE APPLE (en inglés, que es lo que leen)
 ==================================================================
 No account or password is needed. To test: tap "New draw" → type 3 names → "Save and draw" → choose "Create premium draw" (sandbox purchase) or "No thanks" (free version with an ad). Then "Pass the phone" → tap a name → tap the gift to see the result. In "Send links" you can send each person their link by email or WhatsApp.
+
+App Tracking Transparency: the permission request appears the first time the app is opened, right after launch (after Google's consent message, which is only shown in the EU/UK). The app requests ATT permission before any ad is loaded or any data used for tracking is collected. Ads are always requested as non-personalized, whether the user allows or denies.
 
 ==================================================================
 GOOGLE PLAY (para cuando salga Android)
