@@ -339,7 +339,7 @@ NOTAS PARA LA REVISIÓN DE APPLE (en inglés, que es lo que leen)
 ==================================================================
 No account or password is needed. To test: tap "New draw" → type 3 names → "Save and draw" → choose "Create premium draw" (sandbox purchase) or "No thanks" (free version with an ad). Then "Pass the phone" → tap a name → tap the gift to see the result. In "Send links" you can send each person their link by email or WhatsApp.
 
-App Tracking Transparency: the permission request appears the first time the app is opened, right after launch (after Google's consent message, which is only shown in the EU/UK). The app requests ATT permission before any ad is loaded or any data used for tracking is collected. Ads are always requested as non-personalized, whether the user allows or denies.
+App Tracking Transparency: the permission request appears the first time the app is opened, about one second after the home screen is shown, before anything else (Google's consent message, shown only in the EU/UK, comes after it). The app requests ATT permission before any ad is loaded or any data used for tracking is collected. Ads are always requested as non-personalized, whether the user allows or denies.
 
 ==================================================================
 GOOGLE PLAY (para cuando salga Android)

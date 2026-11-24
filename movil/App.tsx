@@ -44,7 +44,6 @@ export default function App() {
 
   useEffect(() => {
     prepararPagos();
-    prepararAnuncios();
     Linking.getInitialURL().then((u) => {
       const c = codigoDe(u);
       if (c) abrirCodigo(c);
@@ -122,8 +121,10 @@ export default function App() {
             injectedJavaScriptBeforeContentLoaded="window.IS_NATIVE_APP=true;true;"
             onMessage={alMensaje}
             onLoadEnd={() => {
+              const primera = !cargada.current;
               cargada.current = true;
               SplashScreen.hideAsync().catch(() => {});
+              if (primera) prepararAnuncios(); // permiso de rastreo y anuncios, con la app ya visible
               if (pendiente.current) {
                 const c = pendiente.current;
                 pendiente.current = null;

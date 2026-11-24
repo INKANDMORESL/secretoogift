@@ -2,9 +2,9 @@
 // IDs reales: variables de GitHub ADMOB_IOS_INTERSTITIAL / ADMOB_ANDROID_INTERSTITIAL. Sin ellas, anuncios de prueba de Google.
 // Solo anuncios no personalizados. En Europa, Google exige el aviso de consentimiento (AdsConsent), que se enseña
 // la primera vez si hace falta. En iPhone, Apple exige además pedir el permiso de rastreo (App Tracking Transparency)
-// antes de cargar anuncios: se pide al abrir la app por primera vez, justo después del aviso de Google.
+// antes de cargar anuncios: se pide al abrir la app por primera vez, antes que nada.
 import { AppState, Platform } from 'react-native';
-import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
+import { getTrackingPermissionsAsync, requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 import mobileAds, { AdEventType, AdsConsent, InterstitialAd, TestIds } from 'react-native-google-mobile-ads';
 
 const UNIDAD =
@@ -35,22 +35,44 @@ function cargar() {
   }
 }
 
+// Permiso de rastreo de Apple. Se pide lo primero, con la app ya visible (sin pantalla de carga) y en primer plano.
+// Si iOS no lo llega a enseñar (sigue «sin decidir»), se vuelve a pedir la próxima vez que la app pase a primer plano.
+async function pedirRastreo() {
+  if (Platform.OS !== 'ios') return;
+  const sinDecidir = async () => {
+    try {
+      return (await getTrackingPermissionsAsync()).status === 'undetermined';
+    } catch {
+      return false;
+    }
+  };
+  const pedir = async () => {
+    for (let i = 0; i < 100 && AppState.currentState !== 'active'; i++) await esperar(100);
+    await esperar(1000);
+    try {
+      if (await sinDecidir()) await requestTrackingPermissionsAsync();
+    } catch {
+      // sin permiso disponible: se sigue igual
+    }
+  };
+  await pedir();
+  if (await sinDecidir()) {
+    const sub = AppState.addEventListener('change', async (estado) => {
+      if (estado !== 'active') return;
+      await pedir();
+      if (!(await sinDecidir())) sub.remove();
+    });
+  }
+}
+
+// Se llama cuando la página ya se ve (al quitar la pantalla de carga).
 export async function prepararAnuncios() {
+  await pedirRastreo(); // diga sí o no, los anuncios siguen siendo no personalizados
   try {
     const info = await AdsConsent.requestInfoUpdate();
     if (info.isConsentFormAvailable) await AdsConsent.loadAndShowConsentFormIfRequired();
   } catch {
     // Sin aviso de consentimiento disponible: se sigue igual
-  }
-  if (Platform.OS === 'ios') {
-    try {
-      // iOS solo enseña el permiso con la app en primer plano
-      for (let i = 0; i < 50 && AppState.currentState !== 'active'; i++) await esperar(100);
-      await esperar(500);
-      await requestTrackingPermissionsAsync(); // diga sí o no, los anuncios siguen siendo no personalizados
-    } catch {
-      // sin permiso disponible: se sigue igual
-    }
   }
   try {
     await mobileAds().initialize();
